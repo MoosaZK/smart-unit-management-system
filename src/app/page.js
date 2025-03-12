@@ -64,28 +64,29 @@ export default function Home() {
         {/* Top row with general information */}
         <div className="flex flex-row gap-6 mb-8 max-w-6xl mx-auto">
           <InfoCard 
-            title="Personnel" 
-            value="245" 
-            icon={<Users className="h-8 w-8 text-blue-500" />}
-            change="+3%"
+            title="FILES" 
+            value="Check of List files" 
+            icon={<GalleryVerticalEnd className="h-8 w-8 text-indigo-500" />}
           />
           <InfoCard 
-            title="Vehicles" 
-            value="42" 
-            icon={<Truck className="h-8 w-8 text-green-500" />}
-            change="-1%"
+            title="State board" 
+            value="Current Status" 
+            icon={<PieChart className="h-8 w-8 text-purple-500" />}
           />
           <InfoCard 
-            title="Medical Readiness" 
-            value="92%" 
-            icon={<Stethoscope className="h-8 w-8 text-red-500" />}
-            change="+5%"
+            title="Daily/Holiday/Special Routines" 
+            value="Manage routines" 
+            icon={<Command className="h-8 w-8 text-orange-500" />}
           />
           <InfoCard 
-            title="Supplies" 
-            value="87%" 
-            icon={<Package className="h-8 w-8 text-amber-500" />}
-            change="-2%"
+            title="Contact Directory" 
+            value="Access Contacts" 
+            icon={<Users className="h-8 w-8 text-green-500" />}
+          />
+          <InfoCard 
+            title="Daily Order" 
+            value="Review Orders" 
+            icon={<Anchor className="h-8 w-8 text-blue-500" />}
           />
         </div>
         
@@ -132,49 +133,34 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className="hover:shadow-lg transition-shadow">
               <CardHeader className="bg-blue-50">
-                <CardTitle className="text-lg">Commander&apos;s Directive</CardTitle>
+                <CardTitle className="text-lg">CO</CardTitle>
               </CardHeader>
               <CardContent className="pt-4">
                 <p className="text-gray-700 mb-3">All unit leaders must complete the updated operational readiness report by end of week.</p>
                 <p className="text-sm text-gray-500">Issued: April 28, 2023</p>
-                <div className="mt-4 flex items-center">
-                  <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center mr-2">
-                    <span className="font-bold text-blue-700">JD</span>
-                  </div>
-                  <span className="text-sm font-medium">Capt. James Donovan</span>
-                </div>
+                
               </CardContent>
             </Card>
             
             <Card className="hover:shadow-lg transition-shadow">
               <CardHeader className="bg-green-50">
-                <CardTitle className="text-lg">Executive Officer&apos;s Notice</CardTitle>
+                <CardTitle className="text-lg">CMWT</CardTitle>
               </CardHeader>
               <CardContent className="pt-4">
                 <p className="text-gray-700 mb-3">Schedule adjustments for summer training rotations are now available. Review and submit feedback by Friday.</p>
                 <p className="text-sm text-gray-500">Issued: April 30, 2023</p>
-                <div className="mt-4 flex items-center">
-                  <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center mr-2">
-                    <span className="font-bold text-green-700">SL</span>
-                  </div>
-                  <span className="text-sm font-medium">Cmdr. Sarah Lin</span>
-                </div>
+                
               </CardContent>
             </Card>
             
             <Card className="hover:shadow-lg transition-shadow">
               <CardHeader className="bg-amber-50">
-                <CardTitle className="text-lg">Operations Officer&apos;s Update</CardTitle>
+                <CardTitle className="text-lg">ExO</CardTitle>
               </CardHeader>
               <CardContent className="pt-4">
                 <p className="text-gray-700 mb-3">New equipment maintenance protocols are in effect immediately. Training sessions will be held next week.</p>
                 <p className="text-sm text-gray-500">Issued: May 1, 2023</p>
-                <div className="mt-4 flex items-center">
-                  <div className="h-8 w-8 rounded-full bg-amber-100 flex items-center justify-center mr-2">
-                    <span className="font-bold text-amber-700">RM</span>
-                  </div>
-                  <span className="text-sm font-medium">Lt. Cmdr. Robert Martinez</span>
-                </div>
+                
               </CardContent>
             </Card>
           </div>
