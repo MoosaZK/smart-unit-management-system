@@ -36,14 +36,14 @@ export default function OfficerDetailsPage() {
         <div className="md:col-span-1">
           <Card>
             <CardContent className="pt-6 flex flex-col items-center">
-              <div className="relative w-48 h-48 rounded-full overflow-hidden mb-4 border-4 border-gray-200">
+              {/* <div className="relative w-48 h-48 rounded-full overflow-hidden mb-4 border-4 border-gray-200">
                 <Image 
                   src={officerImage}
                   alt={officer.name}
                   fill
                   className="object-cover"
                 />
-              </div>
+              </div> */}
               <h2 className="text-xl font-bold">{officer.name}</h2>
               <p className="text-gray-500">{officer.rank}</p>
               <div className="mt-2">

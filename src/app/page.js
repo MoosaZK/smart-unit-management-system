@@ -4,7 +4,15 @@ import { Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
 import Link from 'next/link'
 import { AppSidebar } from '@/components/app-sidebar'
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
-import { AudioWaveform, Command, GalleryVerticalEnd, PieChart, Anchor, Users, Truck, Stethoscope, Package } from 'lucide-react'
+import { AudioWaveform, Command, GalleryVerticalEnd, PieChart, Anchor, Users, Truck, Stethoscope, Package, Wrench, Calendar, ChevronDown } from 'lucide-react'
+
+// Import shadcn dropdown components
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem
+} from "@/components/ui/dropdown-menu"
 
 // Main page data with projects for each unit
 const mainData = {
@@ -33,13 +41,18 @@ const mainData = {
     },
     {
       name: "Transportation",
-      url: "/transportation",
+      url: "#",
       icon: AudioWaveform,
     },
     {
       name: "Healthcare",
-      url: "/healthcare",
-      icon: Command,
+      url: "#",
+      icon: Stethoscope,
+    },
+    {
+      name: "Maintenance",
+      url: "#",
+      icon: Wrench,
     },
   ],
   user: {
@@ -63,30 +76,65 @@ export default function Home() {
         
         {/* Top row with general information */}
         <div className="flex flex-row gap-6 mb-8 max-w-6xl mx-auto">
-          <InfoCard 
+          <DropdownCard 
             title="FILES" 
-            value="Check of List files" 
             icon={<GalleryVerticalEnd className="h-8 w-8 text-indigo-500" />}
+            items={[
+              "OOD Unit files",
+              "DSO files",
+              "Exercise Check of List",
+              "Performas"
+            ]}
           />
-          <InfoCard 
+          <DropdownCard 
             title="State board" 
-            value="Current Status" 
             icon={<PieChart className="h-8 w-8 text-purple-500" />}
+            items={[
+              "In/Out",
+              "ROD",
+              "FOD",
+              "Special orders"
+            ]}
           />
-          <InfoCard 
-            title="Daily/Holiday/Special Routines" 
-            value="Manage routines" 
+          <DropdownCard 
+            title="Activities" 
             icon={<Command className="h-8 w-8 text-orange-500" />}
+            items={[
+              "Academic",
+              "Unit",
+              "Training",
+              "VIP",
+              "Special",
+              "FCTS"
+            ]}
           />
-          <InfoCard 
+          <DropdownCard 
+            title="Routine" 
+            icon={<Calendar className="h-8 w-8 text-green-500" />}
+            items={[
+              "Daily Routine",
+              "Holiday Routine",
+              "Special Routine"
+            ]}
+          />
+          <DropdownCard 
             title="Contact Directory" 
-            value="Access Contacts" 
-            icon={<Users className="h-8 w-8 text-green-500" />}
+            icon={<Users className="h-8 w-8 text-blue-500" />}
+            items={[
+              "Imp",
+              "Internal Bahadur",
+              "External"
+            ]}
           />
-          <InfoCard 
+          <DropdownCard 
             title="Daily Order" 
-            value="Review Orders" 
-            icon={<Anchor className="h-8 w-8 text-blue-500" />}
+            icon={<Anchor className="h-8 w-8 text-teal-500" />}
+            items={[
+              "Yesterday",
+              "Today",
+              "Tomorrow",
+              "Day after Tomorrow"
+            ]}
           />
         </div>
         
@@ -206,5 +254,34 @@ function InfoCard({ title, value, icon, change }) {
         </div>
       </CardContent>
     </Card>
+  )
+}
+
+/**
+ * Updated DropdownCard component using shadcn's DropdownMenu components.
+ */
+function DropdownCard({ title, icon, items }) {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Card className="cursor-pointer flex justify-between  p-2 hover:shadow-xl transition-shadow duration-150 ease-in-out border border-gray-200 rounded-lg w-full">
+          <CardContent className="p-0 flex justify-between items-center">
+            <p className="text-lg font-bold text-gray-700">{title}</p>
+            <ChevronDown className="h-6 w-6 text-gray-500" />
+
+          </CardContent>
+        </Card>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56 mt-2 p-2 rounded-md border border-gray-200 bg-white shadow-lg">
+        {items.map((item, index) => (
+          <DropdownMenuItem 
+            key={index} 
+            className="cursor-pointer hover:bg-gray-100 rounded px-2 py-1"
+          >
+            {item}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }

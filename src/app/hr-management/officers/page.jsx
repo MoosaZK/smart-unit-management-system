@@ -49,7 +49,7 @@ export default function OfficersPage() {
             <TableHead>Name</TableHead>
             <TableHead>P-Number</TableHead>
             <TableHead>State</TableHead>
-            <TableHead>Rank</TableHead>
+            {/* <TableHead>Rank</TableHead> */}
             <TableHead>Contact Number</TableHead>
             <TableHead>Address</TableHead>
             <TableHead>Next of Kin</TableHead>
@@ -69,7 +69,7 @@ export default function OfficersPage() {
                   {officer.state}
                 </span>
               </TableCell>
-              <TableCell>{officer.rank}</TableCell>
+              {/* <TableCell>{officer.rank}</TableCell> */}
               <TableCell>{officer.contactNumber}</TableCell>
               <TableCell className="max-w-xs truncate">{officer.address}</TableCell>
               <TableCell>{officer.nextOfKin}</TableCell>

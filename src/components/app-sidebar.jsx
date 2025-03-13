@@ -165,9 +165,9 @@ export function AppSidebar({
 }) {
   return (
     (<Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
+      {/* <SidebarHeader>
         <TeamSwitcher teams={teams} />
-      </SidebarHeader>
+      </SidebarHeader> */}
       <SidebarContent>
         {/* <NavMain items={data.navMain} /> */}
         <NavProjects projects={projects} />
