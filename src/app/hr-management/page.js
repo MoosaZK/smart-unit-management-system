@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { departments } from "@/data/departments"
 
 export default function HRManagement() {
   return (
@@ -57,31 +58,14 @@ export default function HRManagement() {
         </div>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        <FeatureCard 
-          title="Employee Directory" 
-          description="Access and manage employee information, contact details, and profiles." 
-        />
-        <FeatureCard 
-          title="Attendance Tracking" 
-          description="Monitor employee attendance, time-off requests, and work hours." 
-        />
-        <FeatureCard 
-          title="Performance Reviews" 
-          description="Schedule and conduct employee evaluations and performance assessments." 
-        />
-        <FeatureCard 
-          title="Recruitment" 
-          description="Manage job postings, applications, and candidate tracking." 
-        />
-        <FeatureCard 
-          title="Training & Development" 
-          description="Track employee skills, certifications, and training programs." 
-        />
-        <FeatureCard 
-          title="Payroll Overview" 
-          description="View payroll summaries and compensation information." 
-        />
+      {/* Departmental States */}
+      <div className="mb-12 max-w-6xl mx-auto">
+        <h2 className="text-2xl font-semibold mb-4">Departmental States</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {departments.map(department => (
+            <DepartmentCard key={department.slug} department={department} />
+          ))}
+        </div>
       </div>
     </main>
   )
@@ -127,15 +111,30 @@ function SummaryCard({ title, count, details, linkTo }) {
   )
 }
 
-function FeatureCard({ title, description }) {
+function DepartmentCard({ department }) {
   return (
-    <Card className="hover:shadow-lg transition-shadow">
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p className="text-gray-600">{description}</p>
-      </CardContent>
-    </Card>
+    <Link href={`/hr-management/department/${department.slug}`} className="block">
+      <Card className="hover:shadow-lg transition-shadow">
+        <CardHeader>
+          <CardTitle>{department.name}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-2">
+            <div className="flex justify-between">
+              <span>Total</span>
+              <span>{department.total}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Present</span>
+              <span>{department.present}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Away</span>
+              <span>{department.away}</span>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
   )
 } 
