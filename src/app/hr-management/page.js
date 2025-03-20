@@ -11,13 +11,16 @@ export default function HRManagement() {
       {/* Officer States Dashboard */}
       <div className="mb-12 max-w-6xl mx-auto">
         <h2 className="text-2xl font-semibold mb-4">Personnel Status Overview</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          <StateCard title="Present" count={42} color="bg-green-100 border-green-300 text-green-800" />
-          <StateCard title="TY" count={15} color="bg-blue-100 border-blue-300 text-blue-800" />
-          <StateCard title="CL" count={8} color="bg-yellow-100 border-yellow-300 text-yellow-800" />
-          <StateCard title="SL" count={5} color="bg-orange-100 border-orange-300 text-orange-800" />
-          <StateCard title="Night Off" count={12} color="bg-purple-100 border-purple-300 text-purple-800" />
-          <StateCard title="Detained" count={2} color="bg-red-100 border-red-300 text-red-800" />
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+          <StateCard title="T" count={900} color="bg-green-100 border-green-300 text-green-800" />
+          <StateCard title="P" count={800} color="bg-blue-100 border-blue-300 text-blue-800" />
+          <StateCard title="A" count={100} color="bg-yellow-100 border-yellow-300 text-yellow-800" />
+          <StateCard title="CL/PL" count={3} color="bg-orange-100 border-orange-300 text-orange-800" />
+          <StateCard title="Night Off" count={10} color="bg-purple-100 border-purple-300 text-purple-800" />
+          <StateCard title="Shifa" count={2} color="bg-red-100 border-red-300 text-red-800" />
+          <StateCard title="Rahat" count={4} color="bg-teal-100 border-teal-300 text-teal-800" />
+          <StateCard title="TY" count={5} color="bg-indigo-100 border-indigo-300 text-indigo-800" />
+          <StateCard title="Sick leave" count={2} color="bg-pink-100 border-pink-300 text-pink-800" />
         </div>
       </div>
       

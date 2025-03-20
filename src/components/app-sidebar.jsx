@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   AudioWaveform,
   BookOpen,
@@ -13,24 +13,24 @@ import {
   Settings2,
   SquareTerminal,
   Anchor,
-} from "lucide-react"
+} from "lucide-react";
 
 // import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
-import { NavUser } from "@/components/nav-user"
-import { TeamSwitcher } from "@/components/team-switcher"
+import { NavProjects } from "@/components/nav-projects";
+import { NavUser } from "@/components/nav-user";
+import { TeamSwitcher } from "@/components/team-switcher";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
 // This is sample data.
 const data = {
   user: {
-    name: "Lt. Cmdr. Abdurrahman Dar",
+    name: "Lt. Abdurrahman Dar",
     email: "abdurrahman.dar@us.navy.mil",
     avatar: "/avatars/shadcn.jpg",
   },
@@ -151,11 +151,11 @@ const data = {
     },
     {
       name: "Sailors",
-      url: "/hr-management/sailors",
+      url: "#",
       icon: Anchor,
     },
   ],
-}
+};
 
 export function AppSidebar({
   teams = data.teams,
@@ -164,7 +164,7 @@ export function AppSidebar({
   ...props
 }) {
   return (
-    (<Sidebar collapsible="icon" {...props}>
+    <Sidebar collapsible="icon" {...props}>
       {/* <SidebarHeader>
         <TeamSwitcher teams={teams} />
       </SidebarHeader> */}
@@ -176,6 +176,6 @@ export function AppSidebar({
         <NavUser user={user} />
       </SidebarFooter>
       <SidebarRail />
-    </Sidebar>)
+    </Sidebar>
   );
 }

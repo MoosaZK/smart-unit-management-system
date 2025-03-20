@@ -56,7 +56,7 @@ const mainData = {
     },
   ],
   user: {
-    name: "Lt. Cmdr. Abdurrahman Dar",
+    name: "Lt. Abdurrahman Dar",
     email: "abdurrahman.dar@us.navy.mil",
     avatar: "/avatars/shadcn.jpg",
   }
@@ -72,7 +72,7 @@ export default function Home() {
       />
       <main className="w-full min-h-screen p-8 bg-gradient-to-br from-slate-50 to-gray-100">
         <SidebarTrigger className="mb-4" />
-        <h1 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">Smart Unit Management System</h1>
+        <h1 className="text-3xl font-bold mb-8 text-center ">Smart Unit Management System</h1>
         
         {/* Top row with general information */}
         <div className="flex flex-row gap-6 mb-8 max-w-6xl mx-auto">
@@ -84,16 +84,6 @@ export default function Home() {
               "DSO files",
               "Exercise Check of List",
               "Performas"
-            ]}
-          />
-          <DropdownCard 
-            title="State board" 
-            icon={<PieChart className="h-8 w-8 text-purple-500" />}
-            items={[
-              "In/Out",
-              "ROD",
-              "FOD",
-              "Special orders"
             ]}
           />
           <DropdownCard 
@@ -124,16 +114,6 @@ export default function Home() {
               "Imp",
               "Internal Bahadur",
               "External"
-            ]}
-          />
-          <DropdownCard 
-            title="Daily Order" 
-            icon={<Anchor className="h-8 w-8 text-teal-500" />}
-            items={[
-              "Yesterday",
-              "Today",
-              "Tomorrow",
-              "Day after Tomorrow"
             ]}
           />
         </div>
@@ -178,7 +158,7 @@ export default function Home() {
         {/* Senior Officers Orders section */}
         <div className="mb-8 max-w-6xl mx-auto">
           <h2 className="text-2xl font-bold mb-4 text-gray-800 border-b-2 border-gray-200 pb-2">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-red-500">Senior Officers Orders</span>
+            <span >Senior Officers Orders</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className="hover:shadow-lg transition-shadow border-2 border-blue-300 overflow-hidden">
@@ -191,21 +171,21 @@ export default function Home() {
               </CardContent>
             </Card>
             
-            <Card className="hover:shadow-lg transition-shadow border-2 border-green-300 overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-green-500 to-green-600 text-white">
+            <Card className="hover:shadow-lg transition-shadow border-2 border-blue-300 overflow-hidden">
+              <CardHeader className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
                 <CardTitle className="text-lg">CMWT</CardTitle>
               </CardHeader>
-              <CardContent className="pt-4 bg-green-50">
+              <CardContent className="pt-4 bg-blue-50">
                 <p className="text-gray-700 mb-3">Schedule adjustments for summer training rotations are now available. Review and submit feedback by Friday.</p>
                 <p className="text-sm text-gray-500 bg-white p-2 rounded-md">Issued: April 30, 2023</p>
               </CardContent>
             </Card>
             
-            <Card className="hover:shadow-lg transition-shadow border-2 border-amber-300 overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-amber-500 to-amber-600 text-white">
+            <Card className="hover:shadow-lg transition-shadow border-2 border-blue-300 overflow-hidden">
+              <CardHeader className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
                 <CardTitle className="text-lg">ExO</CardTitle>
               </CardHeader>
-              <CardContent className="pt-4 bg-amber-50">
+              <CardContent className="pt-4 bg-blue-50">
                 <p className="text-gray-700 mb-3">New equipment maintenance protocols are in effect immediately. Training sessions will be held next week.</p>
                 <p className="text-sm text-gray-500 bg-white p-2 rounded-md">Issued: May 1, 2023</p>
               </CardContent>
@@ -230,7 +210,6 @@ function DropdownCard({ title, icon, items }) {
       "Activities": "bg-orange-100 hover:bg-orange-200 border-orange-300",
       "Routine": "bg-green-100 hover:bg-green-200 border-green-300",
       "Contact Directory": "bg-blue-100 hover:bg-blue-200 border-blue-300",
-      "Daily Order": "bg-teal-100 hover:bg-teal-200 border-teal-300"
     };
     return colors[title] || "bg-gray-100 hover:bg-gray-200 border-gray-300";
   };
@@ -270,7 +249,7 @@ function DropdownCard({ title, icon, items }) {
                 title === "Activities" ? "hover:bg-orange-100" : 
                 title === "Routine" ? "hover:bg-green-100" : 
                 title === "Contact Directory" ? "hover:bg-blue-100" : 
-                title === "Daily Order" ? "hover:bg-teal-100" : "hover:bg-gray-100"}`}
+                "hover:bg-gray-100"}`}
             >
               <a href="#">{item}</a>
             </DropdownMenuItem>
