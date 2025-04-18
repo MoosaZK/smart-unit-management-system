@@ -46,7 +46,7 @@ const mainData = {
     },
     {
       name: "Healthcare",
-      url: "#",
+      url: "/healthcare/sickbay",
       icon: Stethoscope,
     },
     {
