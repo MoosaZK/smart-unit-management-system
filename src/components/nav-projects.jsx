@@ -1,6 +1,7 @@
-"use client"
+"use client";
 
 import { Folder, Forward, MoreHorizontal, Trash2 } from "lucide-react";
+import Image from "next/image";
 
 import {
   DropdownMenu,
@@ -8,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -17,17 +18,24 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 import Link from "next/link";
 
-export function NavProjects({
-  projects
-}) {
-  const { isMobile } = useSidebar()
+export function NavProjects({ projects }) {
+  const { isMobile } = useSidebar();
 
   return (
-    (<SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Smart Unit Management System</SidebarGroupLabel>
+    <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+      <SidebarGroupLabel>
+        <Image
+          src="/images/sums-logo.png"
+          alt="SUMS Logo"
+          width={50}
+          height={50}
+          className="-ml-5"
+        />
+        Smart Unit Management System
+      </SidebarGroupLabel>
       <SidebarMenu>
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
@@ -47,7 +55,8 @@ export function NavProjects({
               <DropdownMenuContent
                 className="w-48 rounded-lg"
                 side={isMobile ? "bottom" : "right"}
-                align={isMobile ? "end" : "start"}>
+                align={isMobile ? "end" : "start"}
+              >
                 <DropdownMenuItem>
                   <Folder className="text-muted-foreground" />
                   <span>View Project</span>
@@ -72,6 +81,6 @@ export function NavProjects({
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>
-    </SidebarGroup>)
+    </SidebarGroup>
   );
 }

@@ -1,10 +1,14 @@
-'use client'
-import React from 'react'
-import { AppSidebar } from '@/components/app-sidebar'
-import { SidebarProvider, SidebarTrigger, SidebarInset } from '@/components/ui/sidebar'
-import { Breadcrumbs } from "@/components/breadcrumbs"
-import { Separator } from "@/components/ui/separator"
-import { Map, Frame, PieChart, BookOpen, AudioWaveform } from "lucide-react"
+"use client";
+import React from "react";
+import { AppSidebar } from "@/components/app-sidebar";
+import {
+  SidebarProvider,
+  SidebarTrigger,
+  SidebarInset,
+} from "@/components/ui/sidebar";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { Separator } from "@/components/ui/separator";
+import { Map, Frame, PieChart, BookOpen, AudioWaveform } from "lucide-react";
 
 const maintenanceProjects = [
   {
@@ -24,7 +28,7 @@ const maintenanceProjects = [
   },
   {
     name: "Gunroom",
-    url: "#",
+    url: "/maintenance/gunroom",
     icon: BookOpen,
   },
   {
@@ -32,7 +36,7 @@ const maintenanceProjects = [
     url: "#",
     icon: AudioWaveform,
   },
-]
+];
 
 export default function MaintenanceLayout({ children }) {
   return (
@@ -46,10 +50,8 @@ export default function MaintenanceLayout({ children }) {
             <Breadcrumbs />
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4">
-          {children}
-        </div>
+        <div className="flex flex-1 flex-col gap-4">{children}</div>
       </SidebarInset>
     </SidebarProvider>
-  )
-} 
+  );
+}
