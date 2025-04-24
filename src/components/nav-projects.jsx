@@ -32,7 +32,7 @@ export function NavProjects({ projects }) {
           alt="SUMS Logo"
           width={50}
           height={50}
-          className="-ml-5"
+          className="-ml-5 "
         />
         Smart Unit Management System
       </SidebarGroupLabel>
@@ -40,9 +40,9 @@ export function NavProjects({ projects }) {
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
-              <Link href={item.url}>
+              <Link href={item.url} className="font-semibold ">
                 <item.icon />
-                <span>{item.name}</span>
+                <span className="text-lg font-semibold">{item.name}</span>
               </Link>
             </SidebarMenuButton>
             <DropdownMenu>

@@ -25,7 +25,7 @@ const hrManagementProjects = [
   },
   {
     name: "Allied state",
-    url: "#",
+    url: "/hr-management/allied",
     icon: Users,
   },
   {

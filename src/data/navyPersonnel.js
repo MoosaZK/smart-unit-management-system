@@ -10,7 +10,8 @@ export const navyPersonnel = {
       contactNumber: "0300-1234567",
       address: "House 45, Street 7, DHA Phase 5, Karachi",
       nextOfKin: "Aisha Khan (Wife)",
-      state: "Present"
+      state: "Present",
+      department: "Operations",
     },
     {
       id: 2,
@@ -20,7 +21,8 @@ export const navyPersonnel = {
       contactNumber: "0333-2345678",
       address: "Flat 12, Naval Officers Colony, Islamabad",
       nextOfKin: "Saima Ali (Wife)",
-      state: "TY"
+      state: "TY",
+      department: "Engineering",
     },
     {
       id: 3,
@@ -30,7 +32,8 @@ export const navyPersonnel = {
       contactNumber: "0321-3456789",
       address: "House 23, Naval Housing Scheme, Lahore",
       nextOfKin: "Tariq Raza (Father)",
-      state: "CL"
+      state: "CL",
+      department: "Logistics",
     },
     {
       id: 4,
@@ -40,7 +43,8 @@ export const navyPersonnel = {
       contactNumber: "0345-4567890",
       address: "House 78, Street 12, Askari 5, Karachi",
       nextOfKin: "Fatima Mahmood (Mother)",
-      state: "SL"
+      state: "SL",
+      department: "Intelligence",
     },
     {
       id: 5,
@@ -50,7 +54,8 @@ export const navyPersonnel = {
       contactNumber: "0312-5678901",
       address: "Flat 34, Naval Complex, Karachi",
       nextOfKin: "Amina Akram (Wife)",
-      state: "Night Off"
+      state: "Night Off",
+      department: "Communications",
     },
     {
       id: 6,
@@ -60,7 +65,8 @@ export const navyPersonnel = {
       contactNumber: "0334-6789012",
       address: "House 56, Naval Officers Housing, Islamabad",
       nextOfKin: "Sadia Iqbal (Wife)",
-      state: "Detained"
+      state: "Detained",
+      department: "Administration",
     },
     {
       id: 7,
@@ -70,7 +76,8 @@ export const navyPersonnel = {
       contactNumber: "0301-7890123",
       address: "House 89, DHA Phase 2, Lahore",
       nextOfKin: "Rabia Malik (Wife)",
-      state: "Present"
+      state: "Present",
+      department: "Training",
     },
     {
       id: 8,
@@ -80,8 +87,9 @@ export const navyPersonnel = {
       contactNumber: "0333-8901234",
       address: "Flat 45, Naval Housing Scheme, Karachi",
       nextOfKin: "Shahid Ahmed (Father)",
-      state: "TY"
-    }
+      state: "TY",
+      department: "Medical",
+    },
   ],
   sailors: [
     {
@@ -92,7 +100,7 @@ export const navyPersonnel = {
       contactNumber: "0312-2345678",
       address: "House 12, Street 3, Malir Cantt, Karachi",
       nextOfKin: "Nasreen Hussain (Wife)",
-      state: "Present"
+      state: "Present",
     },
     {
       id: 2,
@@ -102,7 +110,7 @@ export const navyPersonnel = {
       contactNumber: "0334-3456789",
       address: "Flat 23, PNS Karsaz Colony, Karachi",
       nextOfKin: "Abbas Khan (Father)",
-      state: "CL"
+      state: "CL",
     },
     {
       id: 3,
@@ -112,7 +120,7 @@ export const navyPersonnel = {
       contactNumber: "0300-4567890",
       address: "House 34, Street 5, Korangi, Karachi",
       nextOfKin: "Nazia Mehmood (Wife)",
-      state: "SL"
+      state: "SL",
     },
     {
       id: 4,
@@ -122,7 +130,7 @@ export const navyPersonnel = {
       contactNumber: "0321-5678901",
       address: "House 45, Street 6, Manora, Karachi",
       nextOfKin: "Iqbal Ahmed (Father)",
-      state: "Night Off"
+      state: "Night Off",
     },
     {
       id: 5,
@@ -132,7 +140,7 @@ export const navyPersonnel = {
       contactNumber: "0333-6789012",
       address: "House 56, Naval Colony, Islamabad",
       nextOfKin: "Shazia Khan (Wife)",
-      state: "Detained"
+      state: "Detained",
     },
     {
       id: 6,
@@ -142,7 +150,7 @@ export const navyPersonnel = {
       contactNumber: "0345-7890123",
       address: "Flat 67, PNS Rahbar Colony, Karachi",
       nextOfKin: "Jameel Ahmed (Father)",
-      state: "Present"
+      state: "Present",
     },
     {
       id: 7,
@@ -152,7 +160,7 @@ export const navyPersonnel = {
       contactNumber: "0312-8901234",
       address: "House 78, Street 9, Clifton, Karachi",
       nextOfKin: "Saima Akmal (Wife)",
-      state: "TY"
+      state: "TY",
     },
     {
       id: 8,
@@ -162,7 +170,7 @@ export const navyPersonnel = {
       contactNumber: "0334-9012345",
       address: "Flat 89, Naval Housing, Lahore",
       nextOfKin: "Ali Hassan (Father)",
-      state: "CL"
+      state: "CL",
     },
     {
       id: 9,
@@ -172,7 +180,7 @@ export const navyPersonnel = {
       contactNumber: "0300-0123456",
       address: "House 90, Street 10, Defence, Karachi",
       nextOfKin: "Malik Ibrahim (Father)",
-      state: "SL"
+      state: "SL",
     },
     {
       id: 10,
@@ -182,9 +190,9 @@ export const navyPersonnel = {
       contactNumber: "0321-1234567",
       address: "House 01, Naval Colony, Karachi",
       nextOfKin: "Sana Mahmood (Wife)",
-      state: "Night Off"
-    }
-  ]
+      state: "Night Off",
+    },
+  ],
 };
 
-export default navyPersonnel; 
+export default navyPersonnel;
