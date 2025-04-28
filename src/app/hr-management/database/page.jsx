@@ -70,14 +70,17 @@ export default function DatabasePage() {
               <TableHead>Name</TableHead>
               <TableHead>P-Number</TableHead>
               <TableHead>State</TableHead>
-              <TableHead>Department</TableHead>
+              {/* <TableHead>Rank</TableHead> */}
+              <TableHead>Contact Number</TableHead>
+              <TableHead>Address</TableHead>
+              <TableHead>Next of Kin</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filteredOfficers.map((officer) => (
               <TableRow
                 key={officer.id}
-                onClick={() => handleOfficerRowClick(officer.id)}
+                onClick={() => handleRowClick(officer.id)}
                 className="cursor-pointer hover:bg-gray-100"
               >
                 <TableCell className="font-medium">{officer.name}</TableCell>
@@ -91,7 +94,12 @@ export default function DatabasePage() {
                     {officer.state}
                   </span>
                 </TableCell>
-                <TableCell>{officer.department}</TableCell>
+                {/* <TableCell>{officer.rank}</TableCell> */}
+                <TableCell>{officer.contactNumber}</TableCell>
+                <TableCell className="max-w-xs truncate">
+                  {officer.address}
+                </TableCell>
+                <TableCell>{officer.nextOfKin}</TableCell>
               </TableRow>
             ))}
           </TableBody>

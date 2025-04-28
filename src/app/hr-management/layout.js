@@ -30,7 +30,7 @@ const hrManagementProjects = [
   },
   {
     name: "NightOff/CL/PL",
-    url: "#",
+    url: "/hr-management/night-off-cl-pl",
     icon: Calendar,
   },
   {
