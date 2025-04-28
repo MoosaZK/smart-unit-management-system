@@ -200,12 +200,7 @@ export default function LeaveApplicationForm() {
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0">
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    onSelect={handleDateChange}
-                    initialFocus
-                  />
+                  <Calendar selected={date} onSelect={handleDateChange} />
                 </PopoverContent>
               </Popover>
             </div>
