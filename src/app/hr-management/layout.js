@@ -6,6 +6,7 @@ import {
   Calendar,
   ClipboardList,
   Database,
+  Volleyball,
 } from "lucide-react";
 import { AppSidebar } from "@/components/app-sidebar";
 import {
@@ -47,6 +48,11 @@ const hrManagementProjects = [
     name: "Report",
     url: "/hr-management/report",
     icon: BarChart3,
+  },
+  {
+    name: "Sports",
+    url: "/hr-management/sports",
+    icon: Volleyball,
   },
 ];
 export default function Layout({ children }) {
