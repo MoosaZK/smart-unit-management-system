@@ -43,6 +43,11 @@ const hrManagementProjects = [
     url: "/hr-management/database",
     icon: Database,
   },
+  {
+    name: "Report",
+    url: "/hr-management/report",
+    icon: BarChart3,
+  },
 ];
 export default function Layout({ children }) {
   return (
