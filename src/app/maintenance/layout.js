@@ -12,29 +12,24 @@ import { Map, Frame, PieChart, BookOpen, AudioWaveform } from "lucide-react";
 
 const maintenanceProjects = [
   {
-    name: "Sum",
+    name: "Complain Management",
     url: "#",
     icon: Map,
   },
   {
-    name: "Complain Management & Logs",
+    name: "Project Management",
     url: "#",
     icon: Frame,
+  },
+  {
+    name: "Gunroom ",
+    url: "/maintenance/gunroom",
+    icon: BookOpen,
   },
   {
     name: "Unit",
     url: "#",
     icon: PieChart,
-  },
-  {
-    name: "Gunroom",
-    url: "/maintenance/gunroom",
-    icon: BookOpen,
-  },
-  {
-    name: "Barracks",
-    url: "#",
-    icon: AudioWaveform,
   },
 ];
 

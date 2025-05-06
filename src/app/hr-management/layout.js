@@ -35,11 +35,6 @@ const hrManagementProjects = [
     icon: Calendar,
   },
   {
-    name: "PET records",
-    url: "#",
-    icon: ClipboardList,
-  },
-  {
     name: "Database",
     url: "/hr-management/database",
     icon: Database,
