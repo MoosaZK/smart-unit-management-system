@@ -8,7 +8,14 @@ import {
 } from "@/components/ui/sidebar";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Separator } from "@/components/ui/separator";
-import { Map, Frame, PieChart, BookOpen, AudioWaveform } from "lucide-react";
+import {
+  Map,
+  Frame,
+  PieChart,
+  BookOpen,
+  AudioWaveform,
+  BarChart3,
+} from "lucide-react";
 
 const maintenanceProjects = [
   {
@@ -17,8 +24,13 @@ const maintenanceProjects = [
     icon: Map,
   },
   {
-    name: "Project Management",
-    url: "#",
+    name: "Budget Allocation & Projects",
+    url: "/maintenance/projects",
+    icon: BarChart3,
+  },
+  {
+    name: "Complain Management",
+    url: "/maintenance/complain-management",
     icon: Frame,
   },
   {

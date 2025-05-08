@@ -1,54 +1,77 @@
-"use client"
+"use client";
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { usePathname } from "next/navigation"
-import React from "react"
+import React from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { ChevronRight, Home } from "lucide-react";
 
 export function Breadcrumbs() {
   const pathname = usePathname();
-  
-  // Start with Dashboard as the first breadcrumb
-  const breadcrumbs = [];
-  breadcrumbs.push({ title: "Dashboard", href: "/" });
 
-  // Split the URL and generate breadcrumbs for remaining segments
-  const segments = pathname.split('/').filter(segment => segment !== '');
-  let currentPath = "";
-  segments.forEach(segment => {
-    // Skip numeric segments and any unnecessary segments
-    if (!isNaN(Number(segment))) return;
-    if (["classrooms", "assignments", "submissions"].includes(segment)) return;
-    
-    currentPath += `/${segment}`;
-    const title = segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
-    breadcrumbs.push({ title, href: currentPath });
+  // Skip rendering breadcrumbs on home page
+  if (pathname === "/") {
+    return null;
+  }
+
+  // Split the pathname into segments
+  const segments = pathname
+    .split("/")
+    .filter(Boolean)
+    .map((segment) => ({
+      name: segment
+        .split("-")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" "),
+      href: `/${segment}`,
+      isCurrentPage: pathname === `/${segment}`,
+    }));
+
+  // For nested routes, calculate the full path for each segment
+  segments.forEach((segment, index) => {
+    if (index > 0) {
+      segment.href = segments
+        .slice(0, index + 1)
+        .map((s) => s.name.toLowerCase().replace(/ /g, "-"))
+        .join("/");
+      segment.href = `/${segment.href}`;
+      segment.isCurrentPage = pathname === segment.href;
+    }
   });
 
   return (
-    <Breadcrumb>
-      <BreadcrumbList>
-        {breadcrumbs.map((crumb, index) => (
-          <React.Fragment key={crumb.href}>
-            <BreadcrumbItem>
-              {index === breadcrumbs.length - 1 ? (
-                <BreadcrumbPage>{crumb.title}</BreadcrumbPage>
+    <nav aria-label="Breadcrumb" className="flex items-center">
+      <ol className="flex items-center space-x-2 text-sm">
+        <li>
+          <Link
+            href="/"
+            className="text-muted-foreground hover:text-foreground"
+          >
+            <Home className="h-4 w-4" />
+            <span className="sr-only">Home</span>
+          </Link>
+        </li>
+        {segments.map((segment, index) => (
+          <React.Fragment key={segment.href}>
+            <li className="flex items-center">
+              <ChevronRight className="h-4 w-4 text-muted-foreground" />
+            </li>
+            <li>
+              {segment.isCurrentPage || index === segments.length - 1 ? (
+                <span className="font-medium text-foreground">
+                  {segment.name}
+                </span>
               ) : (
-                <BreadcrumbLink href={crumb.href}>
-                  {crumb.title}
-                </BreadcrumbLink>
+                <Link
+                  href={segment.href}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  {segment.name}
+                </Link>
               )}
-            </BreadcrumbItem>
-            {index < breadcrumbs.length - 1 && <BreadcrumbSeparator />}
+            </li>
           </React.Fragment>
         ))}
-      </BreadcrumbList>
-    </Breadcrumb>
+      </ol>
+    </nav>
   );
-} 
+}
