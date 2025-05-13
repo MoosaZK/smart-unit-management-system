@@ -13,7 +13,6 @@ import { PlusCircle, Filter, Search } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
 
 export default function ComplainManagement() {
   const [complaints, setComplaints] = useState(sampleComplaints);
@@ -36,22 +35,12 @@ export default function ComplainManagement() {
     if (activeTab === "mes") {
       result = result.filter(
         (complaint) =>
-          complaint.submittedBy?.toLowerCase().includes("lt.") ||
-          complaint.submittedBy?.toLowerCase().includes("capt.") ||
-          complaint.submittedBy?.toLowerCase().includes("maj.") ||
-          complaint.submittedBy?.toLowerCase().includes("col.") ||
-          complaint.submittedBy?.toLowerCase().includes("cmdr.")
+          complaint.category !== "furniture" && complaint.category !== "hvac"
       );
     } else if (activeTab === "non-mes") {
       result = result.filter(
         (complaint) =>
-          !(
-            complaint.submittedBy?.toLowerCase().includes("lt.") ||
-            complaint.submittedBy?.toLowerCase().includes("capt.") ||
-            complaint.submittedBy?.toLowerCase().includes("maj.") ||
-            complaint.submittedBy?.toLowerCase().includes("col.") ||
-            complaint.submittedBy?.toLowerCase().includes("cmdr.")
-          )
+          complaint.category === "furniture" || complaint.category === "hvac"
       );
     }
 
@@ -107,19 +96,21 @@ export default function ComplainManagement() {
   // Get counts for the tabs
   const mesCount = complaints.filter(
     (complaint) =>
-      complaint.submittedBy?.toLowerCase().includes("lt.") ||
-      complaint.submittedBy?.toLowerCase().includes("capt.") ||
-      complaint.submittedBy?.toLowerCase().includes("maj.") ||
-      complaint.submittedBy?.toLowerCase().includes("col.") ||
-      complaint.submittedBy?.toLowerCase().includes("cmdr.")
+      complaint.category !== "furniture" && complaint.category !== "hvac"
   ).length;
 
-  const nonMesCount = complaints.length - mesCount;
+  const nonMesCount = complaints.filter(
+    (complaint) =>
+      complaint.category === "furniture" || complaint.category === "hvac"
+  ).length;
 
   return (
     <div className="w-full min-h-screen p-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Complaint Management</h1>
+        <div>
+          <h1 className="text-3xl font-bold">Complaint Management</h1>
+          <p className="text-gray-500">Manage and track all complaints</p>
+        </div>
         <Link href="/maintenance/complain-management/new">
           <Button className="bg-blue-500 hover:bg-blue-600">
             <PlusCircle className="h-4 w-4 mr-2" />

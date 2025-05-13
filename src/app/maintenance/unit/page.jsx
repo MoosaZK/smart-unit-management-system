@@ -24,27 +24,27 @@ ChartJS.register(
   Title
 );
 
-export default function GunroomMaintenancePage() {
+export default function UnitMaintenancePage() {
   // Data for Complaints by Category pie chart
   const categoryData = {
-    labels: ["Building", "Electrical", "Furniture", "Sewerage", "Water"],
+    labels: ["Plumbing", "Electrical", "HVAC", "Structural", "Furniture"],
     datasets: [
       {
         label: "Complaints by Category",
-        data: [3, 2, 2, 1, 1],
+        data: [3, 4, 2, 2, 1],
         backgroundColor: [
           "rgba(54, 162, 235, 0.6)",
           "rgba(255, 159, 64, 0.6)",
           "rgba(75, 192, 192, 0.6)",
+          "rgba(255, 99, 132, 0.6)",
           "rgba(153, 102, 255, 0.6)",
-          "rgba(54, 162, 235, 0.4)",
         ],
         borderColor: [
           "rgba(54, 162, 235, 1)",
           "rgba(255, 159, 64, 1)",
           "rgba(75, 192, 192, 1)",
+          "rgba(255, 99, 132, 1)",
           "rgba(153, 102, 255, 1)",
-          "rgba(54, 162, 235, 0.8)",
         ],
         borderWidth: 1,
       },
@@ -57,7 +57,7 @@ export default function GunroomMaintenancePage() {
     datasets: [
       {
         label: "Status Distribution",
-        data: [4, 2, 2, 1],
+        data: [5, 3, 3, 1],
         backgroundColor: [
           "rgba(255, 206, 86, 0.6)",
           "rgba(54, 162, 235, 0.6)",
@@ -81,12 +81,12 @@ export default function GunroomMaintenancePage() {
     datasets: [
       {
         label: "New Complaints",
-        data: [12, 6, 9, 13, 14, 5],
+        data: [15, 6, 9, 14, 15, 5],
         backgroundColor: "rgba(54, 162, 235, 0.6)",
       },
       {
         label: "Resolved",
-        data: [10, 5, 10, 8, 11, 8],
+        data: [11, 5, 10, 9, 11, 8],
         backgroundColor: "rgba(75, 192, 192, 0.6)",
       },
     ],
@@ -94,11 +94,11 @@ export default function GunroomMaintenancePage() {
 
   // Data for Resolution Time by Category bar chart
   const resolutionTimeData = {
-    labels: ["Building", "Electrical", "Furniture", "Sewerage", "Water"],
+    labels: ["Plumbing", "Electrical", "HVAC", "Structural", "Furniture"],
     datasets: [
       {
         label: "Average Days to Resolve",
-        data: [5.2, 3.8, 2.5, 4.7, 3.2],
+        data: [2.3, 3.5, 1.8, 4.1, 1.5],
         backgroundColor: "rgba(54, 162, 235, 0.6)",
       },
     ],
@@ -130,35 +130,10 @@ export default function GunroomMaintenancePage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      {/* Category Breakdown Section */}
-      <div className="mb-8 max-w-6xl mx-auto">
-        <h2 className="text-2xl font-bold mb-4">Category Breakdown</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {[
-            "Electrical",
-            "Building",
-            "Sewerage",
-            "Recreational",
-            "Furniture",
-            "Water",
-            "IT",
-            "Gas",
-          ].map((category) => (
-            <div
-              key={category}
-              className="border-2 border-gray-300 p-4 text-center rounded-lg shadow-sm hover:shadow-md transition-shadow h-24 flex items-center justify-center"
-            >
-              <p className="text-lg font-semibold">{category}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Analytics Dashboard Section */}
-      <div className="mb-8 max-w-6xl mx-auto">
-        <h2 className="text-2xl font-bold mb-2">Analytics Dashboard</h2>
+      <div className="mb-8">
+        <h1 className="text-2xl font-bold mb-2">Analytics Dashboard</h1>
         <p className="text-gray-600 mb-6">
-          Monitor performance metrics and trends across all Gunroom activities
+          Monitor performance metrics and trends across all Unit activities
         </p>
 
         {/* Key Metrics */}
@@ -170,7 +145,7 @@ export default function GunroomMaintenancePage() {
                 <h3 className="text-sm font-medium text-gray-500">
                   Total Complaints
                 </h3>
-                <p className="text-3xl font-bold mt-1">9</p>
+                <p className="text-3xl font-bold mt-1">12</p>
                 <p className="text-xs text-gray-500 mt-1">Past 30 days</p>
               </div>
               <div className="text-blue-400">
@@ -197,7 +172,7 @@ export default function GunroomMaintenancePage() {
                 <h3 className="text-sm font-medium text-gray-500">
                   Average Resolution Time
                 </h3>
-                <p className="text-3xl font-bold mt-1">4.2 days</p>
+                <p className="text-3xl font-bold mt-1">2.8 days</p>
                 <p className="text-xs text-gray-500 mt-1">
                   For resolved complaints
                 </p>
@@ -226,8 +201,8 @@ export default function GunroomMaintenancePage() {
                 <h3 className="text-sm font-medium text-gray-500">
                   Pending Complaints
                 </h3>
-                <p className="text-3xl font-bold mt-1">4</p>
-                <p className="text-xs text-gray-500 mt-1">44.4% of total</p>
+                <p className="text-3xl font-bold mt-1">5</p>
+                <p className="text-xs text-gray-500 mt-1">41.7% of total</p>
               </div>
               <div className="text-yellow-400">
                 <svg
@@ -253,9 +228,9 @@ export default function GunroomMaintenancePage() {
                 <h3 className="text-sm font-medium text-gray-500">
                   Resolution Rate
                 </h3>
-                <p className="text-3xl font-bold mt-1">55.6%</p>
+                <p className="text-3xl font-bold mt-1">58.3%</p>
                 <p className="text-xs text-gray-500 mt-1">
-                  5 out of 9 resolved
+                  7 out of 12 resolved
                 </p>
               </div>
               <div className="text-blue-400">
@@ -276,7 +251,7 @@ export default function GunroomMaintenancePage() {
           </div>
         </div>
 
-        {/* Category Breakdown Detail */}
+        {/* Category Breakdown */}
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mb-8">
           <h2 className="text-lg font-semibold mb-2">Category Breakdown</h2>
           <p className="text-sm text-gray-500 mb-4">
@@ -284,16 +259,16 @@ export default function GunroomMaintenancePage() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Building */}
+            {/* Plumbing */}
             <div className="p-4 rounded-lg border border-gray-100 shadow-sm">
               <div className="flex items-center mb-2">
                 <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2">
-                  <span className="text-blue-600 text-lg">B</span>
+                  <span className="text-blue-600 text-lg">P</span>
                 </div>
-                <span className="font-medium">Building</span>
+                <span className="font-medium">Plumbing</span>
               </div>
               <p className="text-2xl font-bold">3</p>
-              <p className="text-xs text-gray-500">33.3% of total</p>
+              <p className="text-xs text-gray-500">25% of total</p>
             </div>
 
             {/* Electrical */}
@@ -304,44 +279,44 @@ export default function GunroomMaintenancePage() {
                 </div>
                 <span className="font-medium">Electrical</span>
               </div>
-              <p className="text-2xl font-bold">2</p>
-              <p className="text-xs text-gray-500">22.2% of total</p>
+              <p className="text-2xl font-bold">4</p>
+              <p className="text-xs text-gray-500">33.3% of total</p>
             </div>
 
-            {/* Water */}
+            {/* HVAC */}
             <div className="p-4 rounded-lg border border-gray-100 shadow-sm">
               <div className="flex items-center mb-2">
-                <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2">
-                  <span className="text-blue-600 text-lg">W</span>
+                <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-2">
+                  <span className="text-green-600 text-lg">H</span>
                 </div>
-                <span className="font-medium">Water</span>
+                <span className="font-medium">HVAC</span>
               </div>
-              <p className="text-2xl font-bold">1</p>
-              <p className="text-xs text-gray-500">11.1% of total</p>
+              <p className="text-2xl font-bold">2</p>
+              <p className="text-xs text-gray-500">16.7% of total</p>
+            </div>
+
+            {/* Structural */}
+            <div className="p-4 rounded-lg border border-gray-100 shadow-sm">
+              <div className="flex items-center mb-2">
+                <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center mr-2">
+                  <span className="text-red-600 text-lg">S</span>
+                </div>
+                <span className="font-medium">Structural</span>
+              </div>
+              <p className="text-2xl font-bold">2</p>
+              <p className="text-xs text-gray-500">16.7% of total</p>
             </div>
 
             {/* Furniture */}
             <div className="p-4 rounded-lg border border-gray-100 shadow-sm">
               <div className="flex items-center mb-2">
-                <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-2">
-                  <span className="text-green-600 text-lg">F</span>
+                <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center mr-2">
+                  <span className="text-purple-600 text-lg">F</span>
                 </div>
                 <span className="font-medium">Furniture</span>
               </div>
-              <p className="text-2xl font-bold">2</p>
-              <p className="text-xs text-gray-500">22.2% of total</p>
-            </div>
-
-            {/* Sewerage */}
-            <div className="p-4 rounded-lg border border-gray-100 shadow-sm">
-              <div className="flex items-center mb-2">
-                <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center mr-2">
-                  <span className="text-purple-600 text-lg">S</span>
-                </div>
-                <span className="font-medium">Sewerage</span>
-              </div>
               <p className="text-2xl font-bold">1</p>
-              <p className="text-xs text-gray-500">11.1% of total</p>
+              <p className="text-xs text-gray-500">8.3% of total</p>
             </div>
           </div>
         </div>

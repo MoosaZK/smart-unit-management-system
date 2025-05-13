@@ -19,12 +19,7 @@ import {
 
 const maintenanceProjects = [
   {
-    name: "Complain Management",
-    url: "#",
-    icon: Map,
-  },
-  {
-    name: "Budget Allocation & Projects",
+    name: "Project Management and Tracking",
     url: "/maintenance/projects",
     icon: BarChart3,
   },
@@ -40,7 +35,7 @@ const maintenanceProjects = [
   },
   {
     name: "Unit",
-    url: "#",
+    url: "/maintenance/unit",
     icon: PieChart,
   },
 ];

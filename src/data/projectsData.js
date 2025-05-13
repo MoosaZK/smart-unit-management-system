@@ -1,0 +1,73 @@
+// Sample project data
+const projectsData = [
+  {
+    id: "proj-001",
+    title: "Renovation of Administrative Block",
+    description:
+      "Complete renovation of the administrative block including flooring, electrical work, and painting.",
+    budget: 500000,
+    startDate: "2023-10-15",
+    endDate: "2023-12-31",
+    location: "MES South - Karsaz",
+    status: "in-progress",
+    type: "minor",
+  },
+  {
+    id: "proj-002",
+    title: "Network Infrastructure Upgrade",
+    description: "Upgrade of network infrastructure in the officer's mess.",
+    budget: 750000,
+    startDate: "2023-11-01",
+    endDate: "2024-01-15",
+    location: "Officer's Mess",
+    status: "pending",
+    type: "minor",
+  },
+  {
+    id: "proj-003",
+    title: "Solar Panel Installation",
+    description: "Installation of solar panels on the barracks rooftop.",
+    budget: 2500000,
+    startDate: "2023-12-01",
+    endDate: "2024-03-31",
+    location: "Barracks",
+    status: "planned",
+    type: "major",
+  },
+  {
+    id: "proj-004",
+    title: "Water Filtration Plant",
+    description: "Setup of water filtration plant for the entire unit.",
+    budget: 1200000,
+    startDate: "2024-01-10",
+    endDate: "2024-04-20",
+    location: "Utility Area",
+    status: "planned",
+    type: "major",
+  },
+  {
+    id: "proj-005",
+    title: "Recreation Area Refurbishment",
+    description:
+      "Complete refurbishment of the recreation area with new equipment.",
+    budget: 350000,
+    startDate: "2024-02-15",
+    endDate: "2024-03-15",
+    location: "Recreation Center",
+    status: "planned",
+    type: "minor",
+  },
+  {
+    id: "proj-006",
+    title: "Parade Ground Resurfacing",
+    description: "Resurfacing of the main parade ground.",
+    budget: 1800000,
+    startDate: "2024-04-01",
+    endDate: "2024-05-31",
+    location: "Main Parade Ground",
+    status: "planned",
+    type: "major",
+  },
+];
+
+export default projectsData;

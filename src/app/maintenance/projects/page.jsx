@@ -6,81 +6,13 @@ import { PlusCircle, Calendar, MapPin, User, Clock } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-// Sample project data
-const projectsData = [
-  {
-    id: "proj-001",
-    title: "Renovation of Administrative Block",
-    description:
-      "Complete renovation of the administrative block including flooring, electrical work, and painting.",
-    budget: 500000,
-    startDate: "2023-10-15",
-    endDate: "2023-12-31",
-    location: "MES South - Karsaz",
-    status: "in-progress",
-    type: "minor",
-  },
-  {
-    id: "proj-002",
-    title: "Network Infrastructure Upgrade",
-    description: "Upgrade of network infrastructure in the officer's mess.",
-    budget: 750000,
-    startDate: "2023-11-01",
-    endDate: "2024-01-15",
-    location: "Officer's Mess",
-    status: "pending",
-    type: "minor",
-  },
-  {
-    id: "proj-003",
-    title: "Solar Panel Installation",
-    description: "Installation of solar panels on the barracks rooftop.",
-    budget: 2500000,
-    startDate: "2023-12-01",
-    endDate: "2024-03-31",
-    location: "Barracks",
-    status: "planned",
-    type: "major",
-  },
-  {
-    id: "proj-004",
-    title: "Water Filtration Plant",
-    description: "Setup of water filtration plant for the entire unit.",
-    budget: 1200000,
-    startDate: "2024-01-10",
-    endDate: "2024-04-20",
-    location: "Utility Area",
-    status: "planned",
-    type: "major",
-  },
-  {
-    id: "proj-005",
-    title: "Recreation Area Refurbishment",
-    description:
-      "Complete refurbishment of the recreation area with new equipment.",
-    budget: 350000,
-    startDate: "2024-02-15",
-    endDate: "2024-03-15",
-    location: "Recreation Center",
-    status: "planned",
-    type: "minor",
-  },
-  {
-    id: "proj-006",
-    title: "Parade Ground Resurfacing",
-    description: "Resurfacing of the main parade ground.",
-    budget: 1800000,
-    startDate: "2024-04-01",
-    endDate: "2024-05-31",
-    location: "Main Parade Ground",
-    status: "planned",
-    type: "nigadashat",
-  },
-];
+import projectsData from "@/data/projectsData";
+import AddProjectForm from "@/components/forms/AddProjectForm";
 
 export default function ProjectsPage() {
+  const [projects, setProjects] = useState(projectsData);
   const [activeTab, setActiveTab] = useState("minor-projects");
+  const [addDialogOpen, setAddDialogOpen] = useState(false);
 
   // Format currency
   const formatCurrency = (amount) => {
@@ -97,11 +29,15 @@ export default function ProjectsPage() {
     });
   };
 
+  // Handle adding a new project
+  const handleProjectAdded = (newProject) => {
+    setProjects([...projects, newProject]);
+  };
+
   // Filter projects based on active tab
-  const filteredProjects = projectsData.filter((project) => {
+  const filteredProjects = projects.filter((project) => {
     if (activeTab === "minor-projects") return project.type === "minor";
     if (activeTab === "major-projects") return project.type === "major";
-    if (activeTab === "nigadashat") return project.type === "nigadashat";
     if (activeTab === "upcoming-projects") return project.status === "planned";
     return true;
   });
@@ -109,16 +45,24 @@ export default function ProjectsPage() {
   return (
     <div className="w-full min-h-screen p-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Budget Allocation & Projects</h1>
-        <Button className="bg-blue-500 hover:bg-blue-600">
+        <h1 className="text-3xl font-bold">Project Management and Tracking</h1>
+        <Button
+          className="bg-blue-500 hover:bg-blue-600"
+          onClick={() => setAddDialogOpen(true)}
+        >
           <PlusCircle className="h-4 w-4 mr-2" />
-          Add Minor Project
+          Add Project
         </Button>
       </div>
 
-      <p className="text-gray-600 mb-8">
-        Manage and track all project budgets and allocations
-      </p>
+      <p className="text-gray-600 mb-8">Manage and track all projects</p>
+
+      {/* Add Project Dialog */}
+      <AddProjectForm
+        open={addDialogOpen}
+        onOpenChange={setAddDialogOpen}
+        onProjectAdded={handleProjectAdded}
+      />
 
       {/* Tabs */}
       <Tabs
@@ -129,7 +73,6 @@ export default function ProjectsPage() {
         <TabsList className="mb-6">
           <TabsTrigger value="minor-projects">Minor Projects</TabsTrigger>
           <TabsTrigger value="major-projects">Major Projects</TabsTrigger>
-          <TabsTrigger value="nigadashat">Project Nigadashat</TabsTrigger>
           <TabsTrigger value="upcoming-projects">Upcoming Projects</TabsTrigger>
         </TabsList>
 
@@ -139,12 +82,6 @@ export default function ProjectsPage() {
         </TabsContent>
         <TabsContent value="major-projects">
           <ProjectListing title="Major Projects" projects={filteredProjects} />
-        </TabsContent>
-        <TabsContent value="nigadashat">
-          <ProjectListing
-            title="Project Nigadashat"
-            projects={filteredProjects}
-          />
         </TabsContent>
         <TabsContent value="upcoming-projects">
           <ProjectListing
