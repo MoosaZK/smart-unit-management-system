@@ -78,23 +78,20 @@ export default function ProjectsPage() {
 
         {/* All Tabs Content */}
         <TabsContent value="minor-projects">
-          <ProjectListing title="Minor Projects" projects={filteredProjects} />
+          <ProjectTable title="Minor Projects" projects={filteredProjects} />
         </TabsContent>
         <TabsContent value="major-projects">
-          <ProjectListing title="Major Projects" projects={filteredProjects} />
+          <ProjectTable title="Major Projects" projects={filteredProjects} />
         </TabsContent>
         <TabsContent value="upcoming-projects">
-          <ProjectListing
-            title="Upcoming Projects"
-            projects={filteredProjects}
-          />
+          <ProjectTable title="Upcoming Projects" projects={filteredProjects} />
         </TabsContent>
       </Tabs>
     </div>
   );
 }
 
-function ProjectListing({ title, projects }) {
+function ProjectTable({ title, projects }) {
   if (projects.length === 0) {
     return (
       <div className="text-center py-10 bg-gray-50 rounded-md">
@@ -106,108 +103,113 @@ function ProjectListing({ title, projects }) {
     );
   }
 
-  return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">{title}</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function ProjectCard({ project }) {
-  // Status badge color
-  const getStatusColor = (status) => {
+  // Format status text
+  const getStatusText = (status) => {
     switch (status) {
       case "in-progress":
-        return "bg-blue-100 text-blue-800 border-blue-300";
-      case "pending":
-        return "bg-yellow-100 text-yellow-800 border-yellow-300";
+        return "In progress";
       case "completed":
-        return "bg-green-100 text-green-800 border-green-300";
-      case "planned":
-        return "bg-purple-100 text-purple-800 border-purple-300";
+        return "Completed";
+      case "pending":
+        return "Pending Approval";
       default:
-        return "bg-gray-100 text-gray-800 border-gray-300";
+        return status.charAt(0).toUpperCase() + status.slice(1);
     }
   };
 
-  // Format currency
-  const formatCurrency = (amount) => {
-    return `Rs ${amount.toLocaleString()}`;
-  };
-
-  // Format date
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  };
-
   return (
-    <Card className="hover:shadow-lg transition-shadow border-2 border-gray-200 overflow-hidden">
-      <CardHeader className="pb-2 p-4">
-        <div className="flex items-start gap-2 flex-col">
-          <span
-            className={`text-xs font-medium px-2 py-1 rounded-full ${getStatusColor(
-              project.status
-            )}`}
-          >
-            {project.status === "in-progress"
-              ? "In Progress"
-              : project.status.charAt(0).toUpperCase() +
-                project.status.slice(1)}
-          </span>
-          <CardTitle className="text-lg">{project.title}</CardTitle>
-        </div>
-      </CardHeader>
-      <CardContent className="pt-0 p-4">
-        <div className="text-sm text-gray-600 mb-3">{project.description}</div>
+    <div>
+      <h2 className="text-2xl font-bold mb-4">{title}</h2>
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="border px-4 py-2 text-left">S No</th>
+              <th className="border px-4 py-2 text-left">Project</th>
+              <th className="border px-4 py-2 text-left">Priority</th>
+              <th className="border px-4 py-2 text-left">Progress</th>
+              <th className="border px-4 py-2 text-left">Cost Estimate</th>
+              <th className="border px-4 py-2 text-left">Type</th>
+              <th className="border px-4 py-2 text-left">Submission Date</th>
+              <th className="border px-4 py-2 text-left">Resolution Date</th>
+              <th className="border px-4 py-2 text-left">Sponsor Officer</th>
+            </tr>
+          </thead>
+          <tbody>
+            {projects.map((project, index) => {
+              // Determine priority based on budget or status
+              let priority = "Medium";
+              if (
+                project.budget > 2000000 ||
+                project.status === "in-progress"
+              ) {
+                priority = "High";
+              } else if (
+                project.budget < 500000 ||
+                project.status === "completed"
+              ) {
+                priority = "Low";
+              }
 
-        <div className="flex flex-col gap-2 text-sm text-gray-600">
-          <div className="flex items-center gap-1">
-            <User className="h-4 w-4 text-blue-500" />
-            <span className="font-medium">
-              {formatCurrency(project.budget)}
-            </span>
-          </div>
-          <div className="flex items-center gap-1">
-            <Calendar className="h-4 w-4 text-blue-500" />
-            <span>{formatDate(project.startDate)}</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <Clock className="h-4 w-4 text-blue-500" />
-            <span>Due: {formatDate(project.endDate)}</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <MapPin className="h-4 w-4 text-blue-500" />
-            <span>{project.location}</span>
-          </div>
-        </div>
-
-        <div className="mt-4 flex justify-between items-center">
-          <Link
-            href={`/maintenance/projects/${project.id}`}
-            className="text-blue-600 hover:text-blue-800 text-xs font-medium"
-          >
-            View Details
-          </Link>
-          {project.status !== "completed" && (
-            <Link
-              href={`/maintenance/projects/${project.id}/manage`}
-              className="text-green-600 hover:text-green-800 text-xs font-medium"
-            >
-              Manage
-            </Link>
-          )}
-        </div>
-      </CardContent>
-    </Card>
+              return (
+                <tr
+                  key={project.id}
+                  className="border hover:bg-gray-50 cursor-pointer"
+                  onClick={() =>
+                    (window.location.href = `/maintenance/projects/${project.id}`)
+                  }
+                >
+                  <td className="border px-4 py-2">{index + 1}</td>
+                  <td className="border px-4 py-2 font-medium">
+                    {project.title}
+                  </td>
+                  <td className="border px-4 py-2">
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        priority === "High"
+                          ? "bg-red-100 text-red-800"
+                          : priority === "Medium"
+                          ? "bg-orange-100 text-orange-800"
+                          : "bg-green-100 text-green-800"
+                      }`}
+                    >
+                      {priority}
+                    </span>
+                  </td>
+                  <td className="border px-4 py-2">
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        project.status === "in-progress"
+                          ? "bg-blue-100 text-blue-800"
+                          : project.status === "completed"
+                          ? "bg-green-100 text-green-800"
+                          : "bg-yellow-100 text-yellow-800"
+                      }`}
+                    >
+                      {getStatusText(project.status)}
+                    </span>
+                  </td>
+                  <td className="border px-4 py-2">
+                    Rs {project.budget.toLocaleString()}
+                  </td>
+                  <td className="border px-4 py-2">
+                    {project.type.toUpperCase()}
+                  </td>
+                  <td className="border px-4 py-2">
+                    {new Date(project.submissionDate).toLocaleDateString()}
+                  </td>
+                  <td className="border px-4 py-2">
+                    {project.resolutionDate === "In progress"
+                      ? project.resolutionDate
+                      : new Date(project.resolutionDate).toLocaleDateString()}
+                  </td>
+                  <td className="border px-4 py-2">{project.sponsorOfficer}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
