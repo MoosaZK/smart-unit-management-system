@@ -98,6 +98,13 @@ export const sampleComplaints = [
     dueDate: "2023-05-30",
     location: "Admin Block - Ground Floor",
     images: [],
+    costEstimate: "Rs 4,000,000",
+    sponsorOfficer: "MENTO",
+    remarks: {
+      co: "Approve the work to be completed ASAP",
+      exo: "Ensure high quality materials are used",
+      sponsorOfficer: "Work in progress, will be complete by next month",
+    },
     updates: [
       {
         id: "upd-001",
@@ -127,6 +134,13 @@ export const sampleComplaints = [
     dueDate: "2023-06-15",
     location: "Officers Mess",
     images: [],
+    costEstimate: "Rs 500,000",
+    sponsorOfficer: "MENTO",
+    remarks: {
+      co: "",
+      exo: "Need to verify the exact requirements",
+      sponsorOfficer: "Pending approval from higher authorities",
+    },
     updates: [],
   },
   {
@@ -144,6 +158,13 @@ export const sampleComplaints = [
     dueDate: "2023-03-01",
     location: "Main Conference Room",
     images: [],
+    costEstimate: "Rs 20,000",
+    sponsorOfficer: "MENTO",
+    remarks: {
+      co: "Satisfactory completion of work",
+      exo: "Use remaining budget for other furniture repairs",
+      sponsorOfficer: "Work completed as per requirements",
+    },
     updates: [
       {
         id: "upd-003",
@@ -173,6 +194,13 @@ export const sampleComplaints = [
     dueDate: "2023-05-05",
     location: "East Wing - Second Floor",
     images: [],
+    costEstimate: "Rs 250,000",
+    sponsorOfficer: "MENTO",
+    remarks: {
+      co: "This is a priority issue, fix immediately",
+      exo: "Contact ISP if necessary",
+      sponsorOfficer: "Working with IT team to resolve",
+    },
     updates: [
       {
         id: "upd-005",
@@ -196,6 +224,13 @@ export const sampleComplaints = [
     dueDate: null,
     location: "Operations Room",
     images: [],
+    costEstimate: "Rs 15,000",
+    sponsorOfficer: "MENTO",
+    remarks: {
+      co: "",
+      exo: "",
+      sponsorOfficer: "Awaiting technical team assessment",
+    },
     updates: [],
   },
 ];

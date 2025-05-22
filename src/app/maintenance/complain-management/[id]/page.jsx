@@ -254,6 +254,79 @@ export default function ComplaintDetail() {
             )}
           </CardContent>
         </Card>
+
+        {/* Remarks Card */}
+        <Card className="border-2 border-gray-200 mt-6">
+          <CardHeader>
+            <CardTitle>Official Remarks</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-6">
+              {/* CO Remarks */}
+              <div>
+                <h3 className="text-sm font-medium text-gray-500 mb-2">
+                  Commanding Officer Remarks
+                </h3>
+                {complaint.remarks?.co ? (
+                  <div className="bg-blue-50 p-4 rounded-md border border-blue-100">
+                    <p className="text-blue-800">{complaint.remarks.co}</p>
+                  </div>
+                ) : (
+                  <div className="bg-gray-50 p-4 rounded-md border border-gray-200">
+                    <p className="text-gray-500 italic">No remarks provided</p>
+                  </div>
+                )}
+              </div>
+
+              {/* EXO Remarks */}
+              <div>
+                <h3 className="text-sm font-medium text-gray-500 mb-2">
+                  Executive Officer Remarks
+                </h3>
+                {complaint.remarks?.exo ? (
+                  <div className="bg-green-50 p-4 rounded-md border border-green-100">
+                    <p className="text-green-800">{complaint.remarks.exo}</p>
+                  </div>
+                ) : (
+                  <div className="bg-gray-50 p-4 rounded-md border border-gray-200">
+                    <p className="text-gray-500 italic">No remarks provided</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Sponsor Officer Remarks */}
+              <div>
+                <h3 className="text-sm font-medium text-gray-500 mb-2">
+                  Sponsor Officer Remarks
+                </h3>
+                {complaint.remarks?.sponsorOfficer ? (
+                  <div className="bg-purple-50 p-4 rounded-md border border-purple-100">
+                    <p className="text-purple-800">
+                      {complaint.remarks.sponsorOfficer}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="bg-gray-50 p-4 rounded-md border border-gray-200">
+                    <p className="text-gray-500 italic">No remarks provided</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {complaint.status !== "resolved" &&
+              complaint.status !== "rejected" && (
+                <div className="mt-6">
+                  <Link
+                    href={`/maintenance/complain-management/${complaint.id}/update-remarks`}
+                  >
+                    <Button className="bg-purple-500 hover:bg-purple-600">
+                      Update Remarks
+                    </Button>
+                  </Link>
+                </div>
+              )}
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

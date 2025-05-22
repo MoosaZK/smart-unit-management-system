@@ -294,10 +294,101 @@ function ComplaintListing({ complaints }) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {complaints.map((complaint) => (
-        <ComplaintCard key={complaint.id} complaint={complaint} />
-      ))}
+    <div className="overflow-x-auto">
+      <table className="w-full border-collapse">
+        <thead>
+          <tr className="bg-gray-100">
+            <th className="border px-4 py-2 text-left">Complain No</th>
+            <th className="border px-4 py-2 text-left">Issue</th>
+            <th className="border px-4 py-2 text-left">Priority</th>
+            <th className="border px-4 py-2 text-left">Progress</th>
+            <th className="border px-4 py-2 text-left">Cost Estimate</th>
+            <th className="border px-4 py-2 text-left">Type</th>
+            <th className="border px-4 py-2 text-left">Submission Date</th>
+            <th className="border px-4 py-2 text-left">Resolution Date</th>
+            <th className="border px-4 py-2 text-left">Sponsor Officer</th>
+          </tr>
+        </thead>
+        <tbody>
+          {complaints.map((complaint, index) => {
+            // Determine the status text and type (MES or NON-MES)
+            const statusText =
+              complaintStatus.find((s) => s.id === complaint.status)?.name ||
+              "Unknown";
+            const type =
+              complaint.category === "furniture" ||
+              complaint.category === "hvac"
+                ? "NON-MES"
+                : "MES";
+
+            // Calculate resolution date based on updates
+            const resolutionDate =
+              complaint.status === "resolved"
+                ? complaint.updates.length > 0
+                  ? complaint.updates[complaint.updates.length - 1].date
+                  : "N/A"
+                : "In progress";
+
+            return (
+              <tr
+                key={complaint.id}
+                className="border hover:bg-gray-50 cursor-pointer"
+                onClick={() =>
+                  (window.location.href = `/maintenance/complain-management/${complaint.id}`)
+                }
+              >
+                <td className="border px-4 py-2">{index + 1}</td>
+                <td className="border px-4 py-2 font-medium">
+                  {complaint.title}
+                </td>
+                <td className="border px-4 py-2">
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-medium 
+                    ${
+                      complaint.priority === "high"
+                        ? "bg-red-100 text-red-800"
+                        : complaint.priority === "medium"
+                        ? "bg-orange-100 text-orange-800"
+                        : "bg-green-100 text-green-800"
+                    }`}
+                  >
+                    {complaint.priority.charAt(0).toUpperCase() +
+                      complaint.priority.slice(1)}
+                  </span>
+                </td>
+                <td className="border px-4 py-2">
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      complaint.status === "pending"
+                        ? "bg-yellow-100 text-yellow-800"
+                        : complaint.status === "in-progress"
+                        ? "bg-blue-100 text-blue-800"
+                        : complaint.status === "resolved"
+                        ? "bg-green-100 text-green-800"
+                        : "bg-red-100 text-red-800"
+                    }`}
+                  >
+                    {statusText}
+                  </span>
+                </td>
+                <td className="border px-4 py-2">
+                  Rs {Math.floor(Math.random() * 500000)}
+                </td>
+                <td className="border px-4 py-2">{type}</td>
+                <td className="border px-4 py-2">
+                  {new Date(complaint.submittedDate).toLocaleDateString()}
+                </td>
+                <td className="border px-4 py-2">
+                  {resolutionDate === "In progress"
+                    ? resolutionDate
+                    : new Date(resolutionDate).toLocaleDateString()}
+                </td>
+                <td className="border px-4 py-2">MENTO</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }
