@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Separator } from "@/components/ui/separator";
-import { ListChecks, ClipboardList, Calendar } from "lucide-react";
+import { ListChecks, ClipboardList, Calendar, Pill } from "lucide-react";
 
 const healthcareProjects = [
   {
@@ -23,8 +23,13 @@ const healthcareProjects = [
   },
   {
     name: "Hospital Appointment Management",
-    url: "#",
+    url: "/healthcare/hospital",
     icon: Calendar,
+  },
+  {
+    name: "Medicine Management",
+    url: "/healthcare/medicine",
+    icon: Pill,
   },
 ];
 
