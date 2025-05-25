@@ -12,6 +12,7 @@ import {
   Title,
 } from "chart.js";
 import { Pie, Bar } from "react-chartjs-2";
+import CategoryCard from "@/components/category-card";
 
 // Register ChartJS components
 ChartJS.register(
@@ -25,6 +26,14 @@ ChartJS.register(
 );
 
 export default function UnitMaintenancePage() {
+  const categories = [
+    "Electrical",
+    "Building",
+    "Recreational",
+    "Furniture",
+    "IT",
+  ];
+
   // Data for Complaints by Category pie chart
   const categoryData = {
     labels: ["Plumbing", "Electrical", "HVAC", "Structural", "Furniture"],
@@ -130,6 +139,9 @@ export default function UnitMaintenancePage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      {/* Category Breakdown Section */}
+      <CategoryCard categories={categories} source="unit" />
+
       <div className="mb-8">
         <h1 className="text-2xl font-bold mb-2">Analytics Dashboard</h1>
         <p className="text-gray-600 mb-6">

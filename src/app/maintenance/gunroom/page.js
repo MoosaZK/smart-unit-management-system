@@ -12,6 +12,7 @@ import {
   Title,
 } from "chart.js";
 import { Pie, Bar } from "react-chartjs-2";
+import CategoryCard from "@/components/category-card";
 
 // Register ChartJS components
 ChartJS.register(
@@ -25,9 +26,17 @@ ChartJS.register(
 );
 
 export default function GunroomMaintenancePage() {
+  const categories = [
+    "Electrical",
+    "Building",
+    "Recreational",
+    "Furniture",
+    "IT",
+  ];
+
   // Data for Complaints by Category pie chart
   const categoryData = {
-    labels: ["Building", "Electrical", "Furniture", "Sewerage", "Water"],
+    labels: ["Building", "Electrical", "Furniture"],
     datasets: [
       {
         label: "Complaints by Category",
@@ -131,31 +140,10 @@ export default function GunroomMaintenancePage() {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Category Breakdown Section */}
-      <div className="mb-8 max-w-6xl mx-auto">
-        <h2 className="text-2xl font-bold mb-4">Category Breakdown</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {[
-            "Electrical",
-            "Building",
-            "Sewerage",
-            "Recreational",
-            "Furniture",
-            "Water",
-            "IT",
-            "Gas",
-          ].map((category) => (
-            <div
-              key={category}
-              className="border-2 border-gray-300 p-4 text-center rounded-lg shadow-sm hover:shadow-md transition-shadow h-24 flex items-center justify-center"
-            >
-              <p className="text-lg font-semibold">{category}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <CategoryCard categories={categories} source="gunroom" />
 
       {/* Analytics Dashboard Section */}
-      <div className="mb-8 max-w-6xl mx-auto">
+      <div className="mb-8  mx-auto">
         <h2 className="text-2xl font-bold mb-2">Analytics Dashboard</h2>
         <p className="text-gray-600 mb-6">
           Monitor performance metrics and trends across all Gunroom activities
@@ -330,18 +318,6 @@ export default function GunroomMaintenancePage() {
               </div>
               <p className="text-2xl font-bold">2</p>
               <p className="text-xs text-gray-500">22.2% of total</p>
-            </div>
-
-            {/* Sewerage */}
-            <div className="p-4 rounded-lg border border-gray-100 shadow-sm">
-              <div className="flex items-center mb-2">
-                <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center mr-2">
-                  <span className="text-purple-600 text-lg">S</span>
-                </div>
-                <span className="font-medium">Sewerage</span>
-              </div>
-              <p className="text-2xl font-bold">1</p>
-              <p className="text-xs text-gray-500">11.1% of total</p>
             </div>
           </div>
         </div>
