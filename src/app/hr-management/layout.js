@@ -20,7 +20,7 @@ import { Separator } from "@/components/ui/separator";
 // HR Management specific data
 const hrManagementProjects = [
   {
-    name: "State",
+    name: "Unit State",
     url: "/hr-management",
     icon: BarChart3,
   },
@@ -35,17 +35,17 @@ const hrManagementProjects = [
     icon: Calendar,
   },
   {
-    name: "Database",
+    name: "Contact List",
     url: "/hr-management/database",
     icon: Database,
   },
   {
-    name: "Report",
+    name: "Night Report",
     url: "/hr-management/report",
     icon: BarChart3,
   },
   {
-    name: "Sports",
+    name: "Sport's Data",
     url: "/hr-management/sports",
     icon: Volleyball,
   },

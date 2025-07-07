@@ -49,7 +49,7 @@ export default function DatabasePage() {
 
   return (
     <div className="container mx-auto py-6">
-      <h1 className="text-2xl font-bold mb-6">Navy Personnel Database</h1>
+      <h1 className="text-2xl font-bold mb-6">Unit Personnel Information</h1>
 
       {/* Officers Section */}
       <section className="mb-12">
