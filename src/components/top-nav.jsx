@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu } from "lucide-react";
 
 import {
@@ -10,11 +11,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import {
-  Avatar,
-  AvatarImage,
-  AvatarFallback,
-} from "@/components/ui/avatar";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useRole } from "@/context/role-context";
 import { useRouter } from "next/navigation";
 
@@ -32,7 +29,17 @@ export function TopNav({ projects = [], user }) {
     <nav className="fixed top-0 inset-x-0 z-50 bg-gradient-to-r from-navy-700 to-navy-600 text-white shadow-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
         {/* Brand */}
-        <Link href="/" className="text-lg font-semibold tracking-wide">
+        <Link
+          href="/"
+          className="flex items-center text-lg font-semibold tracking-wide gap-2"
+        >
+          <Image
+            src="/images/logo.jpeg"
+            alt="Logo"
+            width={50}
+            height={50}
+            className="h-10 w-10"
+          />
           Smart Unit Management System
         </Link>
 
@@ -67,17 +74,22 @@ export function TopNav({ projects = [], user }) {
                 </span>
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="min-w-48 p-2 rounded-md">
+            <DropdownMenuContent
+              align="end"
+              className="min-w-48 p-2 rounded-md"
+            >
               <DropdownMenuItem disabled>{user.name}</DropdownMenuItem>
               <DropdownMenuItem disabled>{user.email}</DropdownMenuItem>
               <DropdownMenuItem>
                 <Link href="#">Settings</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem onSelect={() => {
-                setRole(null);
-                setAuthenticated(false);
-                router.push("/login");
-              }}>
+              <DropdownMenuItem
+                onSelect={() => {
+                  setRole(null);
+                  setAuthenticated(false);
+                  router.push("/login");
+                }}
+              >
                 Logout
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -92,7 +104,10 @@ export function TopNav({ projects = [], user }) {
                 <Menu className="h-6 w-6" />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="min-w-44 p-2 rounded-md">
+            <DropdownMenuContent
+              align="end"
+              className="min-w-44 p-2 rounded-md"
+            >
               {filteredProjects.map((project) => (
                 <DropdownMenuItem asChild key={project.name}>
                   <Link href={project.url}>{project.name}</Link>
@@ -104,4 +119,4 @@ export function TopNav({ projects = [], user }) {
       </div>
     </nav>
   );
-} 
+}
