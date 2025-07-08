@@ -15,9 +15,19 @@ import {
   AvatarImage,
   AvatarFallback,
 } from "@/components/ui/avatar";
+import { useRole } from "@/context/role-context";
+import { useRouter } from "next/navigation";
 
 // Top navigation bar component
 export function TopNav({ projects = [], user }) {
+  const { role, setRole, setAuthenticated } = useRole();
+  const router = useRouter();
+  let filteredProjects = projects;
+  if (role === "MENTO") {
+    filteredProjects = projects.filter((p) => p.name === "Maintenance");
+  } else if (role === "SMO") {
+    filteredProjects = projects.filter((p) => p.name === "Healthcare");
+  }
   return (
     <nav className="fixed top-0 inset-x-0 z-50 bg-gradient-to-r from-navy-700 to-navy-600 text-white shadow-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
@@ -28,7 +38,7 @@ export function TopNav({ projects = [], user }) {
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-6">
-          {projects.map((project) => {
+          {filteredProjects.map((project) => {
             const Icon = project.icon;
             return (
               <Link
@@ -63,7 +73,13 @@ export function TopNav({ projects = [], user }) {
               <DropdownMenuItem>
                 <Link href="#">Settings</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem onSelect={() => {
+                setRole(null);
+                setAuthenticated(false);
+                router.push("/login");
+              }}>
+                Logout
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         )}
@@ -77,7 +93,7 @@ export function TopNav({ projects = [], user }) {
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="min-w-44 p-2 rounded-md">
-              {projects.map((project) => (
+              {filteredProjects.map((project) => (
                 <DropdownMenuItem asChild key={project.name}>
                   <Link href={project.url}>{project.name}</Link>
                 </DropdownMenuItem>

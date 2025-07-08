@@ -26,7 +26,7 @@ export function NavProjects({ projects }) {
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>
+      {/* <SidebarGroupLabel>
         <Image
           src="/images/sums-logo.png"
           alt="SUMS Logo"
@@ -35,8 +35,8 @@ export function NavProjects({ projects }) {
           className="-ml-5 "
         />
         Smart Unit Management System
-      </SidebarGroupLabel>
-      <SidebarMenu>
+      </SidebarGroupLabel> */}
+      <SidebarMenu className="pt-16">
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>

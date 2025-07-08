@@ -2,7 +2,6 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { TopNav } from "@/components/top-nav";
 import {
   AudioWaveform,
   Command,
@@ -26,58 +25,9 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 
-// Main page data with projects for each unit
-const mainData = {
-  teams: [
-    {
-      name: "HR Management",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-    {
-      name: "Transportation",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Healthcare and medical readiness",
-      logo: Command,
-      plan: "Free",
-    },
-  ],
-  projects: [
-    {
-      name: "HR Management",
-      url: "/hr-management",
-      icon: PieChart,
-    },
-    {
-      name: "TPT & LOG",
-      url: "/tpt-log",
-      icon: AudioWaveform,
-    },
-    {
-      name: "Healthcare",
-      url: "/healthcare/sickbay",
-      icon: Stethoscope,
-    },
-    {
-      name: "Maintenance",
-      url: "/maintenance/complain-management",
-      icon: Wrench,
-    },
-  ],
-  user: {
-    name: "Lt. Abdurrahman Dar",
-    email: "abdurrahman.dar@us.navy.mil",
-    avatar: "/avatars/shadcn.jpg",
-  },
-};
-
 export default function Home() {
   return (
     <>
-      <TopNav projects={mainData.projects} user={mainData.user} />
       <main className="w-full min-h-screen p-8 pt-24 bg-gradient-to-br from-slate-50 to-gray-100">
         <h1 className="text-3xl font-bold mb-8 text-center ">
           Smart Unit Management System
