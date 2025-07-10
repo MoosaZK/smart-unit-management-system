@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -100,7 +100,26 @@ export default function SickbayPage() {
     },
   ];
 
-  const [tableData, setTableData] = useState(initialData);
+  const [tableData, setTableData] = useState(() => {
+    // Try to read previously stored data from localStorage (client-side only)
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("sickbayData");
+      if (stored) {
+        try {
+          return JSON.parse(stored);
+        } catch {
+          // Malformed JSON – fall back to initial data
+        }
+      }
+    }
+    return initialData;
+  });
+
+  // Persist changes to localStorage so data survives page refreshes
+  useEffect(() => {
+    localStorage.setItem("sickbayData", JSON.stringify(tableData));
+  }, [tableData]);
+
   const [formData, setFormData] = useState({
     name: "",
     department: "",
