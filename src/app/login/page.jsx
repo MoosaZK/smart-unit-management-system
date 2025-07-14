@@ -16,7 +16,6 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
 
   const handleNormalLogin = () => {
-    // For demo purposes we do not check credentials
     setRole(null);
     setAuthenticated(true);
     router.push("/");
@@ -30,18 +29,19 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen flex-col lg:flex-row">
-      {/* Left side with full-height logo */}
-      <div className="relative hidden lg:block lg:w-1/2 bg-slate-50">
+      {/* Logo section: covers left half on large screens, top on small screens */}
+      <div className="w-full lg:w-1/2 min-h-64 h-64 lg:h-auto flex-shrink-0 relative flex items-center justify-center bg-slate-50" >
         <Image
           src="/images/logo.jpeg"
           alt="SUMS Logo"
           fill
-          className="object-contain "
+          className="object-contain mt-[15vh] lg:mt-0 lg:object-cover"
           priority
+          sizes="(max-width: 1024px) 100vw, 50vw"
         />
       </div>
 
-      {/* Right side with login card */}
+      {/* Login form */}
       <div className="flex flex-1 items-center justify-center bg-gradient-to-br from-slate-50 to-gray-100 p-4">
         <Card className="w-full max-w-md border-2 border-navy-200 shadow-lg">
           <CardHeader>
