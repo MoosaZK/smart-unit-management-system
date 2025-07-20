@@ -51,74 +51,24 @@ ChartJS.register(
 export default function SickbayPage() {
   const categories = ["ATTE", "PEFER", "OTAC", "STL", "MEDICATION"];
 
-  // Initial table data
-  const initialData = [
-    {
-      id: 1,
-      name: "John Doe",
-      department: "Infantry",
-      time: "09:30 AM",
-      illness: "Fever",
-      remarks: "Under observation",
-      category: "ATTE",
-    },
-    {
-      id: 2,
-      name: "Alice Smith",
-      department: "Artillery",
-      time: "10:15 AM",
-      illness: "Headache",
-      remarks: "Medication prescribed",
-      category: "PEFER",
-    },
-    {
-      id: 3,
-      name: "Bob Johnson",
-      department: "Logistics",
-      time: "11:45 AM",
-      illness: "Sprain",
-      remarks: "Rest advised",
-      category: "OTAC",
-    },
-    {
-      id: 4,
-      name: "Emma Wilson",
-      department: "Communications",
-      time: "01:30 PM",
-      illness: "Cold",
-      remarks: "Follow-up tomorrow",
-      category: "STL",
-    },
-    {
-      id: 5,
-      name: "Mike Brown",
-      department: "Engineering",
-      time: "02:45 PM",
-      illness: "Diarrhea",
-      remarks: "Hydration advised",
-      category: "MEDICATION",
-    },
-  ];
+  // Admissions fetched from backend
+  const [tableData, setTableData] = useState([]);
 
-  const [tableData, setTableData] = useState(() => {
-    // Try to read previously stored data from localStorage (client-side only)
-    if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("sickbayData");
-      if (stored) {
-        try {
-          return JSON.parse(stored);
-        } catch {
-          // Malformed JSON – fall back to initial data
-        }
-      }
+  // Helper to load admissions from API
+  const fetchAdmissions = async () => {
+    try {
+      const res = await fetch("/api/sickbay");
+      const data = await res.json();
+      // Map MongoDB _id to id for UI convenience
+      setTableData(data.map((item) => ({ ...item, id: item._id })));
+    } catch (err) {
+      console.error("Failed to fetch admissions", err);
     }
-    return initialData;
-  });
+  };
 
-  // Persist changes to localStorage so data survives page refreshes
   useEffect(() => {
-    localStorage.setItem("sickbayData", JSON.stringify(tableData));
-  }, [tableData]);
+    fetchAdmissions();
+  }, []);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -163,27 +113,30 @@ export default function SickbayPage() {
     setEditingId(null);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (editingId) {
-      // Update existing record
-      setTableData((prev) =>
-        prev.map((row) =>
-          row.id === editingId ? { ...row, ...formData, id: editingId } : row
-        )
-      );
-    } else {
-      // Add new record
-      setTableData((prev) => [
-        ...prev,
-        {
-          id: prev.length ? prev[prev.length - 1].id + 1 : 1,
-          ...formData,
-        },
-      ]);
+    try {
+      if (editingId) {
+        // Update existing admission
+        await fetch(`/api/sickbay/${editingId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+      } else {
+        // Create new admission
+        await fetch("/api/sickbay", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+      }
+      await fetchAdmissions();
+      setOpen(false);
+      resetForm();
+    } catch (err) {
+      console.error("Error saving admission", err);
     }
-    setOpen(false);
-    resetForm();
   };
 
   const handleEdit = (row) => {
@@ -199,9 +152,14 @@ export default function SickbayPage() {
     setOpen(true);
   };
 
-  const handleDelete = (id) => {
-    setTableData((prev) => prev.filter((row) => row.id !== id));
-    if (editingId === id) resetForm();
+  const handleDelete = async (id) => {
+    try {
+      await fetch(`/api/sickbay/${id}`, { method: "DELETE" });
+      await fetchAdmissions();
+      if (editingId === id) resetForm();
+    } catch (err) {
+      console.error("Failed to delete admission", err);
+    }
   };
 
   // Chart data
