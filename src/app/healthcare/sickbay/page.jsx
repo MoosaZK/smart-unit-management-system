@@ -162,7 +162,7 @@ export default function SickbayPage() {
     }
   };
 
-  // Chart data
+  // Chart data /
   const chartData = {
     labels: ["January", "February", "March", "April", "May", "June"],
     datasets: [
