@@ -19,7 +19,8 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { UserIcon } from "lucide-react";
-import { patients } from "@/data/patients";
+import { format } from "date-fns";
+// Data will be fetched from the backend
 
 export default function PatientDetails({ params }) {
   const router = useRouter();
@@ -27,17 +28,31 @@ export default function PatientDetails({ params }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Find the patient with the matching ID
-    const patientData = patients.find(p => p.id === parseInt(params.id));
-    
-    if (patientData) {
-      setPatient(patientData);
+    async function fetchPatient() {
+      try {
+        const res = await fetch(`/api/patients/${params.id}`);
+        if (!res.ok) throw new Error("Failed to fetch patient");
+        const data = await res.json();
+        setPatient(data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
     }
-    setLoading(false);
+    fetchPatient();
   }, [params.id]);
 
   const handleGoBack = () => {
     router.back();
+  };
+
+  const formatDate = (d) => {
+    try {
+      return format(new Date(d), "dd MMM yyyy");
+    } catch {
+      return d;
+    }
   };
 
   if (loading) {
@@ -63,12 +78,8 @@ export default function PatientDetails({ params }) {
     );
   }
 
-  // Dummy data for medical history - in a real app, this would come from the API
-  const medicalHistory = [
-    { date: "2023-10-15", illness: "Pneumonia", remarks: "Prescribed antibiotics" },
-    { date: "2023-08-22", illness: "Regular checkup", remarks: "All vitals normal" },
-    { date: "2023-05-10", illness: "Influenza", remarks: "Bed rest advised" },
-  ];
+  // Use history array from backend if provided
+  const medicalHistory = patient.history ?? [];
 
   return (
     <div className="container mx-auto p-6">
@@ -86,14 +97,34 @@ export default function PatientDetails({ params }) {
             </div>
             <CardTitle className="text-center">{patient.name}</CardTitle>
             <CardDescription className="text-center">
-              Patient ID: {patient.id}
+              Patient ID: {patient._id}
             </CardDescription>
+            <div className="flex justify-center gap-2 mt-4">
+              <Button size="sm" variant="secondary" onClick={() => router.push(`/healthcare/patient-history`)}>
+                Back to List
+              </Button>
+              <Button size="sm" onClick={() => router.push(`/healthcare/patient-history?edit=${patient._id}`)}>
+                Edit
+              </Button>
+              <Button size="sm" variant="destructive" onClick={async () => {
+                if (!confirm("Are you sure you want to delete this patient?")) return;
+                try {
+                  const res = await fetch(`/api/patients/${patient._id}`, { method: "DELETE" });
+                  if (!res.ok) throw new Error("Failed");
+                  router.push(`/healthcare/patient-history`);
+                } catch (err) {
+                  console.error(err);
+                }
+              }}>
+                Delete
+              </Button>
+            </div>
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
               <div className="flex justify-between">
                 <span className="font-medium">Last Visit:</span>
-                <span>{patient.dateOfAdmission}</span>
+                <span>{formatDate(patient.dateOfAdmission)}</span>
               </div>
               <div className="flex justify-between">
                 <span className="font-medium">Total Visits:</span>
@@ -123,19 +154,27 @@ export default function PatientDetails({ params }) {
               <TableBody>
                 {/* Current illness */}
                 <TableRow>
-                  <TableCell>{patient.dateOfAdmission}</TableCell>
+                  <TableCell>{formatDate(patient.dateOfAdmission)}</TableCell>
                   <TableCell>{patient.illness}</TableCell>
                   <TableCell>{patient.remarks}</TableCell>
                 </TableRow>
                 
                 {/* Past history */}
-                {medicalHistory.map((record, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{record.date}</TableCell>
-                    <TableCell>{record.illness}</TableCell>
-                    <TableCell>{record.remarks}</TableCell>
+                {medicalHistory.length > 0 ? (
+                  medicalHistory.map((record, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{formatDate(record.date)}</TableCell>
+                      <TableCell>{record.illness}</TableCell>
+                      <TableCell>{record.remarks}</TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={3} className="text-center text-muted-foreground">
+                      No previous records
+                    </TableCell>
                   </TableRow>
-                ))}
+                )}
               </TableBody>
             </Table>
           </CardContent>

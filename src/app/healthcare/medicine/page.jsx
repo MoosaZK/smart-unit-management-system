@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Search, Plus, CalendarIcon, Filter } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -21,6 +21,16 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { TrashIcon, PencilIcon } from "lucide-react";
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -35,85 +45,118 @@ import {
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
 
-const medicineData = [
-  {
-    id: 1,
-    pNo: "123245",
-    rank: "Lt",
-    name: "Habib",
-    disease: "Migraine",
-    medicine: "2x Boxes of Panadole Tablets",
-    issueDate: "11/5/2023",
-    endDate: "31/5/2023",
-    duration: "3x weeks",
-    status: "completed",
-  },
-  {
-    id: 2,
-    pNo: "24252",
-    rank: "Lt Cdr",
-    name: "Uzair",
-    disease: "Fractured arm",
-    medicine: "3x Boxes of buprofen 400 mg\n2x boxes Pantoprazole 40 mg",
-    issueDate: "12/5/2023",
-    endDate: "12/6/2023",
-    duration: "4x weeks",
-    status: "completed",
-  },
-  {
-    id: 3,
-    pNo: "21432",
-    rank: "PO",
-    name: "Kamal",
-    disease: "Influenza",
-    medicine: "1x Box of Paracetamol 500 mg",
-    issueDate: "1/10/2024",
-    endDate: "15/10/2024",
-    duration: "2x weeks",
-    status: "active",
-  },
-  {
-    id: 4,
-    pNo: "234243",
-    rank: "MCPO",
-    name: "Waleed",
-    disease: "Hypertension",
-    medicine: "10x Tablets of Losartan 50 mg",
-    issueDate: "2/8/2024",
-    endDate: "20/8/2024",
-    duration: "2x weeks",
-    status: "active",
-  },
-  {
-    id: 5,
-    pNo: "758329",
-    rank: "S/Lt",
-    name: "Tahir",
-    disease: "Diabetes",
-    medicine: "2x Boxes of Metformin 500 mg",
-    issueDate: "3/5/2024",
-    endDate: "3/6/2024",
-    duration: "4x weeks",
-    status: "active",
-  },
-  {
-    id: 6,
-    pNo: "85953",
-    rank: "Cap",
-    name: "Abbas",
-    disease: "Allergic reaction",
-    medicine: "7x Tablets of Cetirizine 10 mg",
-    issueDate: "3/5/2024",
-    endDate: "10/5/2024",
-    duration: "1x week",
-    status: "active",
-  },
-];
+// Data will now be loaded from the backend – no more hard-coded array.
 
 export default function MedicinePage() {
+  const [medicines, setMedicines] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
-  const [filteredData, setFilteredData] = useState(medicineData);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [editingRecord, setEditingRecord] = useState(null);
+  const [formData, setFormData] = useState({
+    pNo: "",
+    rank: "",
+    name: "",
+    disease: "",
+    medicine: "",
+    issueDate: "",
+    endDate: "",
+    duration: "",
+    status: "active",
+  });
+
+  const openAddDialog = () => {
+    setEditingRecord(null);
+    setFormData({
+      pNo: "",
+      rank: "",
+      name: "",
+      disease: "",
+      medicine: "",
+      issueDate: "",
+      endDate: "",
+      duration: "",
+      status: "active",
+    });
+    setIsFormOpen(true);
+  };
+
+  const openEditDialog = (record) => {
+    setEditingRecord(record);
+    setFormData({
+      pNo: record.pNo,
+      rank: record.rank,
+      name: record.name,
+      disease: record.disease,
+      medicine: record.medicine,
+      issueDate: record.issueDate ? record.issueDate.slice(0, 10) : "",
+      endDate: record.endDate ? record.endDate.slice(0, 10) : "",
+      duration: record.duration,
+      status: record.status,
+    });
+    setIsFormOpen(true);
+  };
+
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const method = editingRecord ? "PUT" : "POST";
+      const url = editingRecord ? `/api/medicines/${editingRecord._id}` : "/api/medicines";
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (!res.ok) throw new Error("Failed to save record");
+      const saved = await res.json();
+      if (editingRecord) {
+        setMedicines((prev) => prev.map((m) => (m._id === saved._id ? saved : m)));
+      } else {
+        setMedicines((prev) => [saved, ...prev]);
+      }
+      setIsFormOpen(false);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!confirm("Are you sure you want to delete this record?")) return;
+    try {
+      const res = await fetch(`/api/medicines/${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Failed to delete");
+      setMedicines((prev) => prev.filter((m) => m._id !== id));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // Load medicines on mount
+  useEffect(() => {
+    async function fetchMedicines() {
+      try {
+        const res = await fetch("/api/medicines");
+        if (!res.ok) throw new Error("Failed to fetch medicines");
+        const data = await res.json();
+        setMedicines(data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchMedicines();
+  }, []);
+
+  // Re-apply filters whenever underlying data or filter criteria change
+  useEffect(() => {
+    applyFilters(searchQuery, statusFilter);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [medicines, searchQuery, statusFilter]);
 
   const handleSearch = (e) => {
     const query = e.target.value.toLowerCase();
@@ -127,7 +170,7 @@ export default function MedicinePage() {
   };
 
   const applyFilters = (query, status) => {
-    let filtered = medicineData;
+    let filtered = medicines;
 
     // Apply search query filter
     if (query.trim() !== "") {
@@ -234,7 +277,7 @@ export default function MedicinePage() {
             </Popover>
           </div>
 
-          <Button className="w-full md:w-auto">
+          <Button className="w-full md:w-auto" onClick={openAddDialog}>
             <Plus className="h-4 w-4 mr-2" />
             Add New Record
           </Button>
@@ -274,9 +317,9 @@ export default function MedicinePage() {
               </TableHeader>
               <TableBody>
                 {filteredData.length > 0 ? (
-                  filteredData.map((row) => (
-                    <TableRow key={row.id}>
-                      <TableCell>{row.id}</TableCell>
+                  filteredData.map((row, index) => (
+                    <TableRow key={row._id}>
+                      <TableCell>{index + 1}</TableCell>
                       <TableCell>{row.pNo}</TableCell>
                       <TableCell>
                         <Badge variant="outline">{row.rank}</Badge>
@@ -312,10 +355,9 @@ export default function MedicinePage() {
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end">
-                            <DropdownMenuItem>View Details</DropdownMenuItem>
-                            <DropdownMenuItem>Edit</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => openEditDialog(row)}>Edit</DropdownMenuItem>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem className="text-destructive">
+                            <DropdownMenuItem className="text-destructive" onClick={() => handleDelete(row._id)}>
                               Delete
                             </DropdownMenuItem>
                           </DropdownMenuContent>
@@ -337,9 +379,71 @@ export default function MedicinePage() {
 
         {filteredData.length > 0 && (
           <div className="text-sm text-muted-foreground">
-            Showing {filteredData.length} of {medicineData.length} records
+            Showing {filteredData.length} of {medicines.length} records
           </div>
         )}
+
+        {/* Medicine Form Dialog */}
+        <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>{editingRecord ? "Edit Record" : "Add Record"}</DialogTitle>
+            </DialogHeader>
+            <form onSubmit={handleFormSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="pNo">P.No</Label>
+                <Input id="pNo" name="pNo" value={formData.pNo} onChange={handleFormChange} required />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="rank">Rank</Label>
+                <Input id="rank" name="rank" value={formData.rank} onChange={handleFormChange} required />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="name">Name</Label>
+                <Input id="name" name="name" value={formData.name} onChange={handleFormChange} required />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="disease">Disease</Label>
+                <Input id="disease" name="disease" value={formData.disease} onChange={handleFormChange} required />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="medicine">Medicine</Label>
+                <Input id="medicine" name="medicine" value={formData.medicine} onChange={handleFormChange} required />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="issueDate">Issue Date</Label>
+                <Input id="issueDate" type="date" name="issueDate" value={formData.issueDate} onChange={handleFormChange} required />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="endDate">End Date</Label>
+                <Input id="endDate" type="date" name="endDate" value={formData.endDate} onChange={handleFormChange} required />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="duration">Duration</Label>
+                <Input id="duration" name="duration" value={formData.duration} onChange={handleFormChange} />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="status">Status</Label>
+                <select
+                  id="status"
+                  name="status"
+                  value={formData.status}
+                  onChange={handleFormChange}
+                  className="border rounded-md w-full p-2"
+                >
+                  <option value="active">Active</option>
+                  <option value="completed">Completed</option>
+                </select>
+              </div>
+              <DialogFooter className="pt-2">
+                <DialogClose asChild>
+                  <Button type="button" variant="outline">Cancel</Button>
+                </DialogClose>
+                <Button type="submit">Save</Button>
+              </DialogFooter>
+            </form>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );

@@ -394,7 +394,7 @@ export default function HospitalAppointmentPage() {
       <div className="flex justify-center mb-6 items-center">
         <Button
           className={`mx-2 ${
-            activeTab === "rahat" ? "bg-blue-600" : "bg-gray-300 text-gray-800"
+            activeTab === "rahat" ? "bg-blue-600" : "bg-gray-300 hover:bg-gray-100 text-gray-800"
           }`}
           onClick={() => setActiveTab("rahat")}
         >
@@ -407,7 +407,7 @@ export default function HospitalAppointmentPage() {
         </div>
         <Button
           className={`mx-2 ${
-            activeTab === "shifa" ? "bg-blue-600" : "bg-gray-300 text-gray-800"
+            activeTab === "shifa" ? "bg-blue-600" : "bg-gray-300 hover:bg-gray-100 text-gray-800"
           }`}
           onClick={() => setActiveTab("shifa")}
         >
