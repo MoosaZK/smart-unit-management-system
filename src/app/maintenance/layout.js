@@ -34,7 +34,7 @@ const maintenanceProjects = [
     icon: BookOpen,
   },
   {
-    name: "Unit",
+    name: "Barracks",
     url: "/maintenance/unit",
     icon: PieChart,
   },

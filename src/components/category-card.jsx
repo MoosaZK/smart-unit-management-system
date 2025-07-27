@@ -17,7 +17,7 @@ export default function CategoryCard({ categories, source }) {
         {categories.map((category) => (
           <div
             key={category}
-            className="border-2 border-gray-300 p-4 text-center rounded-lg shadow-sm hover:shadow-md transition-shadow h-24 flex items-center justify-center cursor-pointer"
+            className="border-2 border-blue-300 bg-blue-50 p-4 text-center rounded-lg shadow-sm hover:shadow-md transition-shadow h-24 flex items-center justify-center cursor-pointer"
             onClick={() => handleCategoryClick(category)}
           >
             <p className="text-lg font-semibold">{category}</p>

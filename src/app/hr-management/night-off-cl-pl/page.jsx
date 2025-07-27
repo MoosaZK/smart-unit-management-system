@@ -33,6 +33,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useRouter } from "next/navigation";
 
 // Sample data - this would typically come from your backend
 const MOCK_APPLICATIONS = [
@@ -92,6 +93,7 @@ export default function NightOffCLPLPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [typeFilter, setTypeFilter] = useState("all");
+  const router = useRouter();
 
   const filteredApplications = MOCK_APPLICATIONS.filter((app) => {
     const matchesSearch =
@@ -232,7 +234,7 @@ export default function NightOffCLPLPage() {
                       key={application.id}
                       className="hover:bg-muted/50 cursor-pointer"
                       onClick={() =>
-                        (window.location.href = `/hr-management/night-off-cl-pl/${application.id}`)
+                        router.push(`/hr-management/night-off-cl-pl/${application.id}`)
                       }
                     >
                       <TableCell className="font-medium">

@@ -129,9 +129,9 @@ export default function ComplainManagement() {
             <p className="text-2xl font-bold">{complaints.length}</p>
           </CardContent>
         </Card>
-        <Card className="border-2 border-yellow-300">
-          <CardHeader className="bg-yellow-100 pb-2">
-            <CardTitle className="text-sm">Pending</CardTitle>
+        <Card className="border-2 border-blue-300">
+          <CardHeader className="bg-blue-100 pb-2">
+           <CardTitle className="text-sm">Pending</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-2xl font-bold">
@@ -149,8 +149,8 @@ export default function ComplainManagement() {
             </p>
           </CardContent>
         </Card>
-        <Card className="border-2 border-green-300">
-          <CardHeader className="bg-green-100 pb-2">
+        <Card className="border-2 border-blue-300">
+          <CardHeader className="bg-blue-100 pb-2">
             <CardTitle className="text-sm">Resolved</CardTitle>
           </CardHeader>
           <CardContent>

@@ -4,19 +4,17 @@ import { createContext, useContext, useEffect, useState } from "react";
 const RoleContext = createContext({ role: null, setRole: () => {}, authenticated: false, setAuthenticated: () => {} });
 
 export function RoleProvider({ children }) {
-  const [role, setRole] = useState(null);
-  const [authenticated, setAuthenticated] = useState(false);
+  const [role, setRole] = useState(() => {
+    if (typeof window === "undefined") return null;
+    return localStorage.getItem("userRole") || null;
+  });
 
-  useEffect(() => {
-    // Load initial role from localStorage if present
-    const stored = typeof window !== "undefined" ? localStorage.getItem("userRole") : null;
-    if (stored) setRole(stored);
-  }, []);
+  const [authenticated, setAuthenticated] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem("isAuthenticated") === "true";
+  });
 
-  useEffect(() => {
-    const storedAuth = typeof window !== "undefined" ? localStorage.getItem("isAuthenticated") : null;
-    if (storedAuth === "true") setAuthenticated(true);
-  }, []);
+  // Effects above replaced with lazy initialization in useState
 
   // Persist role changes
   useEffect(() => {

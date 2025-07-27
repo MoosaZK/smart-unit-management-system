@@ -19,47 +19,47 @@ export default function HRManagement() {
           <StateCard
             title="T"
             count={900}
-            color="bg-green-100 border-green-300 text-green-800"
+            color="bg-[#3270e2]  text-white"
           />
           <StateCard
             title="P"
             count={800}
-            color="bg-blue-100 border-blue-300 text-blue-800"
+      color="bg-[#3270e2]  text-white"
           />
           <StateCard
             title="A"
             count={100}
-            color="bg-yellow-100 border-yellow-300 text-yellow-800"
+            color="bg-[#3270e2]  text-white"
           />
           <StateCard
             title="CL/PL"
             count={3}
-            color="bg-orange-100 border-orange-300 text-orange-800"
+            color="bg-[#3270e2]  text-white"
           />
           <StateCard
             title="Night Off"
             count={10}
-            color="bg-purple-100 border-purple-300 text-purple-800"
+            color="bg-[#3270e2]  text-white"
           />
           <StateCard
             title="Shifa"
             count={2}
-            color="bg-red-100 border-red-300 text-red-800"
+            color="bg-[#3270e2]  text-white"
           />
           <StateCard
             title="Rahat"
             count={4}
-            color="bg-teal-100 border-teal-300 text-teal-800"
+color="bg-[#3270e2]  text-white"
           />
           <StateCard
             title="TY"
             count={5}
-            color="bg-indigo-100 border-indigo-300 text-indigo-800"
+color="bg-[#3270e2]  text-white"
           />
           <StateCard
             title="Sick leave"
             count={2}
-            color="bg-pink-100 border-pink-300 text-pink-800"
+color="bg-[#3270e2]  text-white"
           />
         </div>
       </div>

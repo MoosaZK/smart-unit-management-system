@@ -65,12 +65,22 @@ export default function LoginPage() {
             <Button className="w-full" onClick={handleNormalLogin}>
               Login as CO
             </Button>
+            <Button className="w-full" onClick={handleNormalLogin}>
+              Login as OOD
+            </Button>
             <Button
               variant="outline"
               className="w-full"
               onClick={() => handleRoleLogin("MENTO")}
             >
               Login as MENTO
+            </Button>
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={() => handleRoleLogin("SMO")}
+            >
+              Login as HealthCare Staff
             </Button>
             <Button
               variant="outline"

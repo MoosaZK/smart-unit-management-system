@@ -25,7 +25,7 @@ export default function FleetOverviewPage() {
       {/* Fleet Overview Section */}
       <section className="border rounded-lg p-4 space-y-4 bg-card shadow-sm">
         <h2 className="text-lg font-semibold underline underline-offset-4">
-          Fleet Overview:
+          Unit Transport Overview:
         </h2>
 
         <Table>
@@ -55,7 +55,7 @@ export default function FleetOverviewPage() {
       {/* Maintenance Overview Section */}
       <section className="border rounded-lg p-4 space-y-4 bg-card shadow-sm">
         <h2 className="text-lg font-semibold underline underline-offset-4">
-          Maintenance Overview:
+          Unit Transport Maintenance Overview:
         </h2>
 
         <Table>
@@ -66,9 +66,9 @@ export default function FleetOverviewPage() {
               <TableHead>Model</TableHead>
               <TableHead>Make</TableHead>
               <TableHead>Date</TableHead>
-              <TableHead>Requested By</TableHead>
+              <TableHead>Reported By</TableHead>
               <TableHead>Issue</TableHead>
-              <TableHead>NON Ops Period</TableHead>
+              <TableHead>Reffered to</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Next Inspection Date</TableHead>
               <TableHead>Mileage (km)</TableHead>
